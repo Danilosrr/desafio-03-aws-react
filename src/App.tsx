@@ -1,14 +1,19 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Search from "./components/search/Search";
+import { AuthProvider } from "./contexts/authContext";
+import Portfolio from "./components/portfolio/portfolio";
 
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<></>} />
-        <Route path="/home" element={<></>} />
-        <Route path="/edit" element={<></>} />
-      </Routes>
+      <AuthProvider>
+        <Routes>
+          <Route path="/" element={<Search />} />
+          <Route path="/portfolio" element={<Portfolio/>} />
+          <Route path="/edit" element={<></>} />
+        </Routes>
+      </AuthProvider>
     </BrowserRouter>
   );
 }
