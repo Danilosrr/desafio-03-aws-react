@@ -5,7 +5,6 @@ import {
   signInWithPopup,
   signOut,
   User,
-  UserCredential,
 } from "firebase/auth";
 import { auth } from "../auth/firebase";
 import { useNavigate } from "react-router-dom";
@@ -15,7 +14,7 @@ const AuthContext = React.createContext<AuthContext>({} as AuthContext);
 interface AuthContext {
   currentUser: User | null;
   userLoggedIn: boolean;
-  signInGithub: () => Promise<UserCredential>;
+  signInGithub: () => Promise<User | undefined>;
   signOutGithub: () => Promise<void>;
 }
 
@@ -40,9 +39,14 @@ export function AuthProvider({ children }: Readonly<{ children: ReactNode }>) {
   }
 
   async function signInGithub() {
-    const provider = new GithubAuthProvider();
-    const request = await signInWithPopup(auth, provider);
-    return request;
+    try {
+        const provider = new GithubAuthProvider();
+        const request = await signInWithPopup(auth, provider);
+        return request.user;     
+    } catch (error) {
+        console.log("An error happened");
+        return;
+    }
   }
 
   async function signOutGithub() {
