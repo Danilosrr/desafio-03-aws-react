@@ -32,11 +32,10 @@ export default function NavBar() {
             suggestion.push({ name: user.displayName as string, uid:user.providerData[0].uid });
             localStorage.setItem("desafio-03", JSON.stringify(suggestion));
           }
-          navigate(`/portfolio/${user.displayName}`);
         } else {
-          localStorage.setItem("desafio-03", JSON.stringify([{ name: user.displayName,provider:user.providerData }]));
-          navigate(`/portfolio/${user.displayName}`);
+          localStorage.setItem("desafio-03", JSON.stringify([{ name: user.displayName, uid: user.providerData[0].uid }]));
         }
+        navigate(`/portfolio/${user.providerData[0].uid}`);
       }
     } catch (error) {
       console.log(error);
