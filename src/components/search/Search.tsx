@@ -5,20 +5,17 @@ import { useForm } from "react-hook-form";
 import { useAuth } from "../../contexts/authContext";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { Suggestion } from "../../interfaces/search";
 import "./Search.css";
 
 interface IFormInput {
   search: string;
 }
 
-interface Suggestions {
-    name: string;
-}
-
 export default function Search() {
   const {signInGithub} = useAuth();
   const navigate = useNavigate();
-  const [suggestions, setSuggestion] = useState<Suggestions[]>([]);
+  const [suggestions, setSuggestion] = useState<Suggestion[]>([]);
 
   const {
     register,

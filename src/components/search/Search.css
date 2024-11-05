@@ -78,15 +78,16 @@
         }
     }
 
+    .login {
+        height: 32px;
+    }
     button:hover {
         cursor: pointer;
     }
 }
 
 
-.login {
-    height: 32px;
-}
+
 
 .primary,
 .secondary,
