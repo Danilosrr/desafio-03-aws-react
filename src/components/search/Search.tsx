@@ -1,10 +1,11 @@
 import { FaArrowRight } from "react-icons/fa";
 import { TbBrandGithubFilled } from "react-icons/tb";
-import { set, useForm } from "react-hook-form";
+import { IoPersonSharp } from "react-icons/io5";
+import { useForm } from "react-hook-form";
 import { useAuth } from "../../contexts/authContext";
 import { useNavigate } from "react-router-dom";
-import "./Search.css";
 import { useEffect, useState } from "react";
+import "./Search.css";
 
 interface IFormInput {
   search: string;
@@ -21,10 +22,13 @@ export default function Search() {
 
   const {
     register,
-    //setError,
+    setError,
+    watch,
     handleSubmit,
     formState: { errors },
   } = useForm<IFormInput>();
+  
+  const search = watch("search");
 
   const getSuggestions = () =>{
     const storedData = localStorage.getItem('desafio-03');
@@ -40,8 +44,14 @@ export default function Search() {
   }
 
   const onSubmit = (data: IFormInput) => {
-    //setError("search", { type:"server", message:"O nome que você digitou não está cadastrado!" });
-    console.log(JSON.stringify(data));
+    try {
+      for (const match of suggestions){
+        if (match.name.startsWith(data.search)) return navigate(`/portfolio/${match.name}`);
+      }
+      return setError("search", { type:"server", message:"O nome que você digitou não está cadastrado!" })
+    } catch (error) {
+      console.log(error)
+    }
   };
 
   const signIn = async (e: React.MouseEvent) => {
@@ -70,15 +80,24 @@ export default function Search() {
       <h2>Digite o nome do usuário que deseja buscar</h2>
       <section className="searchBar">
         <form autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
-          <input list="users"
+          <input
             {...register("search", {
               required: {value: true, message: "O nome que você digitou não existe ou não está cadastrado!"}
             })}
           />
-          
-          <button className="primary" type="submit">
+          <button className="primary" type="submit" disabled={!search}>
             <FaArrowRight size={25} />
           </button>
+          <ul className="suggestions" hidden={false}>
+            {suggestions.map(({name})=> { 
+              if (search && name.startsWith(search)){
+                return <li key={name}>
+                <IoPersonSharp size={16}/>
+                <p className="label">{name}</p>
+              </li>
+              }
+            })}
+          </ul>
         </form>
         {errors.search  &&  <p className="warning">{errors.search.message}</p>}
       </section>
@@ -95,9 +114,6 @@ export default function Search() {
         </button>
       </section>
 
-      <datalist id="users">
-      {suggestions.map(({name})=> { return <option key={name} value={name}></option>})}
-      </datalist>
     </main>
   );
 }
