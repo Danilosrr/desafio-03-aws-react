@@ -1,6 +1,8 @@
 import { FaArrowRight } from "react-icons/fa";
 import { TbBrandGithubFilled } from "react-icons/tb";
 import { useForm } from "react-hook-form";
+import { useAuth } from "../../contexts/authContext";
+import { useNavigate } from "react-router-dom";
 import "./Search.css";
 
 interface IFormInput {
@@ -8,9 +10,12 @@ interface IFormInput {
 }
 
 export default function Search() {
+  const {signInGithub} = useAuth();
+  const navigate = useNavigate();
+
   const {
     register,
-    setError,
+    //setError,
     handleSubmit,
     formState: { errors },
   } = useForm<IFormInput>();
@@ -18,6 +23,16 @@ export default function Search() {
   const onSubmit = (data: IFormInput) => {
     //setError("search", { type:"server", message:"O nome que você digitou não está cadastrado!" });
     console.log(JSON.stringify(data));
+  };
+
+  const signIn = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    try {
+      await signInGithub();
+      navigate("/portfolio");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -44,7 +59,7 @@ export default function Search() {
       </section>
       <section className="login">
         <b>Acesse sua conta com</b>
-        <button className="secondary">
+        <button className="secondary" onClick={signIn}>
           <TbBrandGithubFilled size={16} />
           <p>Github</p>
         </button>
