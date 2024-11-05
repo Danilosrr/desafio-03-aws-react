@@ -32,7 +32,6 @@
         display: grid;
         grid-template-columns: 100%;
         grid-template-rows: 40px auto;
-        grid-auto-flow: column dense;
 
         form {
             display: flex;
@@ -57,10 +56,11 @@
         }
     }
 
-    .line, .login {
+    .line,
+    .login {
         display: flex;
         align-items: center;
-        justify-content: center;        
+        justify-content: center;
         gap: 12px;
         width: 100%;
 
@@ -121,9 +121,24 @@ input {
     color: #992020;
     font-size: 12px;
     font-weight: 600;
+    animation: slidein 1s;
 }
 
 .warning::before {
     display: inline;
     content: "⚠ ";
+}
+
+@keyframes slidein {
+    from {
+        max-height: 0px;
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    to {
+        max-height: 1000px;
+        transform: scale(1);
+        opacity: 1;
+    }
 }
