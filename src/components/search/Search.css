@@ -7,88 +7,123 @@
     gap: 16px;
     padding: 20px;
 
-    h2,b {
+    h2,
+    b,
+    p {
         font-family: "Roboto", sans-serif;
         line-height: 130%;
-        color: #18191F;
     }
 
     h2 {
+        color: #18191F;
         font-size: 30px;
         font-weight: 800;
         text-align: center;
     }
 
     b {
+        color: #18191F;
         font-size: 16px;
         font-weight: 700;
     }
-    
-    section {
+
+    .searchBar {
         width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 12px;
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: 40px auto;
+        grid-auto-flow: column dense;
 
-        input,
-        button {
-            border-radius: 10px;
-            border: #18191F solid 1px;
-        }
-
-        input {
-            width: 100%;
-            height: 40px;
-        }
-        input::placeholder{
-            padding-left: 12px;
-            font-size: 16px;
-            color: #D1D5DB;
-        }
-
-        button {
+        form {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-            color: #FFF;
+            gap: 12px;
+
+            input {
+                text-indent: 12px;
+                width: 100%;
+                border-radius: 10px;
+            }
+
+            input::placeholder {
+                font-size: 16px;
+                color: #D1D5DB;
+            }
+
+            button {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
         }
-        
-        button:hover {
-            cursor: pointer;
-        }
+    }
+
+    .line, .login {
+        display: flex;
+        align-items: center;
+        justify-content: center;        
+        gap: 12px;
+        width: 100%;
 
         hr {
             height: 3px;
             width: 100%;
             background-color: #004346;
         }
+
+        button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+    button:hover {
+        cursor: pointer;
     }
 }
 
-.line{
-    height: 26px;
-}
 
 .login {
     height: 32px;
 }
 
+.primary,
+.secondary,
+input {
+    box-sizing: border-box;
+    border: #18191F solid 1px;
+}
+
 .primary {
+    color: #FFF;
     background: #D1D5DB;
+    border-radius: 10px;
+    height: 40px;
     width: 55px;
 }
 
 .secondary {
+    color: #FFF;
     background-color: #172A3A;
-    width: 85px !important;
-    border-radius: 16px !important;
-
+    width: 85px;
+    height: 32px;
+    border-radius: 16px;
     gap: 6px;
-    
-    p{
+
+    p {
         font-size: 10px;
         font-weight: 800;
     }
+}
+
+.warning {
+    margin: 4px 0;
+    color: #992020;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.warning::before {
+    display: inline;
+    content: "⚠ ";
 }
