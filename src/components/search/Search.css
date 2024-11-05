@@ -34,6 +34,7 @@
         grid-template-rows: 40px auto;
 
         form {
+            position: relative;
             display: flex;
             gap: 12px;
 
@@ -127,6 +128,35 @@ input {
 .warning::before {
     display: inline;
     content: "⚠ ";
+}
+
+.suggestions {
+    z-index: 1;
+    box-sizing: border-box;
+    position: absolute;
+    top: 50px;
+    display: grid;
+    grid-template-columns: 100%;
+    width: 100%;
+    padding: 8px;
+    color:#C9CACC;
+    background-color: #FFF;
+    border: #D6D6D6 solid 1px;
+    border-radius: 4px;
+    box-shadow: 6px 6px 8px 0px #0000002B;
+
+    li {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        height: 30px;
+        font-weight: 600;
+        border-bottom: #D6D6D6 solid 1px;
+    }
+
+}
+.suggestions:empty {
+    display: none;
 }
 
 @keyframes slidein {
