@@ -29,12 +29,12 @@ export default function NavBar() {
           
           const nameInSuggestions = suggestion.find( ({ name }) => name === user.displayName);
           if (!nameInSuggestions) {
-            suggestion.push({ name: user.displayName as string });
+            suggestion.push({ name: user.displayName as string, uid:user.providerData[0].uid });
             localStorage.setItem("desafio-03", JSON.stringify(suggestion));
           }
           navigate(`/portfolio/${user.displayName}`);
         } else {
-          localStorage.setItem("desafio-03", JSON.stringify([{ name: user.displayName }]));
+          localStorage.setItem("desafio-03", JSON.stringify([{ name: user.displayName,provider:user.providerData }]));
           navigate(`/portfolio/${user.displayName}`);
         }
       }
@@ -45,7 +45,7 @@ export default function NavBar() {
 
   return (
     <nav className="portfolioNav">
-      <a href="#start">Início</a>
+      <a href="#top">Início</a>
       <a href="#about">Minha história</a>
       <a href="#exp">Experiências</a>
       <a href="#contact">Contato</a>

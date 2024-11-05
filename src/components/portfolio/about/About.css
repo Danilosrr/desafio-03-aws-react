@@ -1,0 +1,29 @@
+.aboutSection {
+    box-sizing: border-box;
+    margin-top: 54px;
+    width: 100%;
+    padding: 64px 32px;
+    background-color: bisque;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    h2, b, p {
+        font-family: "Roboto", sans-serif;
+        line-height: 130%;
+        color: #18191F;
+    }
+
+    .aboutPitch {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        background-color: azure;
+        h2 {
+            font-size: 32px;
+            font-weight: 800;
+        }
+        b {
+            color: #09BC8A;
+        }
+    }
+}

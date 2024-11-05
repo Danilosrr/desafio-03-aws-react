@@ -1,3 +1,4 @@
 export interface Suggestion {
-    name: string;
+  name: string;
+  uid: string
 }

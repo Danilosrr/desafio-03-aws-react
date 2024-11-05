@@ -58,10 +58,10 @@ export default function Search() {
       if (user) {
         const nameInSuggestions = suggestions.find(({name}) => name === user.displayName)  
         if (!nameInSuggestions) {
-          suggestions.push({name:user.displayName as string});
+          suggestions.push({name:user.displayName as string, uid: user.providerData[0].uid});
           localStorage.setItem('desafio-03',JSON.stringify(suggestions));
         }
-        navigate("/portfolio");
+        navigate(`/portfolio/${user.providerData[0].uid}`);
       }
     } catch (error) {
       console.log(error);
