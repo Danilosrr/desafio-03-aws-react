@@ -80,10 +80,10 @@ export default function Search() {
             <FaArrowRight size={25} />
           </button>
           <ul className="suggestions" hidden={false}>
-            {suggestions.map(({ name }) => {
+            {suggestions.map(({ name,uid }) => {
               if (search && name.startsWith(search)) {
                 return (
-                  <li key={name}>
+                  <li key={name} onClick={()=>{navigate(`/portfolio/${uid}`);}}>
                     <IoPersonSharp size={16} />
                     <p className="label">{name}</p>
                   </li>
