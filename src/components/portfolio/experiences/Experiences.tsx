@@ -1,5 +1,16 @@
-import { RiEditFill, RiDeleteBin7Fill } from "react-icons/ri";
+import { RiEditFill, RiDeleteBin7Fill, RiAddCircleLine } from "react-icons/ri";
 import "./Experiences.css";
+
+function AddCard() {
+  return (
+    <article className="card">
+      <div className="addCard">
+        <RiAddCircleLine size={72}/>
+        <h3>Adicionar card</h3>
+      </div>
+    </article>
+    )
+}
 
 function Card() {
   const editCard = () =>{ console.log('edit') }
@@ -38,6 +49,7 @@ export default function Experiences() {
         {[0, 1, 2].map((x) => {
           return <Card key={x} />;
         })}
+        {true && <AddCard/>/*placeholder*/}
       </div>
     </section>
   );
