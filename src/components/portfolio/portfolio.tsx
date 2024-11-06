@@ -27,7 +27,13 @@ export default function Portfolio() {
   return (
     <>
       <NavBar />
-      <About name={data?.name} img={data?.avatar_url}/>
+      <About
+        name={data?.name}
+        img={data?.avatar_url}
+        login={data?.login}
+        location={data?.location}
+        email={data?.email}
+      />
     </>
   );
 }
