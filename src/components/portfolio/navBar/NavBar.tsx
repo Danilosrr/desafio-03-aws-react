@@ -44,7 +44,7 @@ export default function NavBar() {
 
   return (
     <nav className="portfolioNav">
-      <a href="#top">Início</a>
+      <a href="#user">Início</a>
       <a href="#about">Minha história</a>
       <a href="#exp">Experiências</a>
       <a href="#contact">Contato</a>

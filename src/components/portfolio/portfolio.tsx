@@ -1,5 +1,6 @@
 import NavBar from "./navBar/NavBar";
 import About from "./about/About";
+import Experiences from "./experiences/Experiences";
 import { useParams } from "react-router-dom";
 import { GithubUserData } from "../../interfaces/github";
 import { useEffect, useState } from "react";
@@ -34,6 +35,7 @@ export default function Portfolio() {
         location={data?.location}
         email={data?.email}
       />
+      <Experiences />
     </>
   );
 }

@@ -18,7 +18,7 @@ export default function About({
 }: Readonly<Props>) {
   return (
     <>
-      <section className="aboutSection">
+      <section className="aboutSection" id="user">
         <article className="aboutUser">
             <figure>
             <div className="portrait">
@@ -40,7 +40,7 @@ export default function About({
             </span>
         </aside>
       </section>
-      <section className="aboutTextArea">
+      <section className="aboutTextArea" id="about">
         <article>
             <h2>Minha história</h2>
             <textarea></textarea> 
