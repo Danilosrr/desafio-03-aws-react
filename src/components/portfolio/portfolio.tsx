@@ -1,23 +1,41 @@
-import React, { useEffect } from "react";
-import { useAuth } from "../../contexts/authContext";
+import NavBar from "./navBar/NavBar";
+import About from "./about/About";
+import Experiences from "./experiences/Experiences";
 import { useParams } from "react-router-dom";
+import { GithubUserData } from "../../interfaces/github";
+import { useEffect, useState } from "react";
+import { getUserInfo } from "../../utils/Api";
 
 export default function Portfolio() {
-  const { name } = useParams();
-  const { signOutGithub } = useAuth();
+  const [data, setData] = useState<GithubUserData | null>(null);
+  const { uid } = useParams();
 
-  const logOut = async (e: React.MouseEvent) => {
-    e.preventDefault();
+  async function getData(uid: string) {
     try {
-      await signOutGithub();
+      const request = await getUserInfo(uid);
+      setData(request);
+      console.log(request);
+      return request;
     } catch (error) {
       console.log(error);
     }
-  };
+  }
 
   useEffect(() => {
-    console.log(name)
+    if (uid) getData(uid);
   }, []);
 
-  return <button onClick={logOut}>sair</button>;
+  return (
+    <>
+      <NavBar />
+      <About
+        name={data?.name}
+        img={data?.avatar_url}
+        login={data?.login}
+        location={data?.location}
+        email={data?.email}
+      />
+      <Experiences />
+    </>
+  );
 }

@@ -5,20 +5,17 @@ import { useForm } from "react-hook-form";
 import { useAuth } from "../../contexts/authContext";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { Suggestion } from "../../interfaces/search";
 import "./Search.css";
 
 interface IFormInput {
   search: string;
 }
 
-interface Suggestions {
-    name: string;
-}
-
 export default function Search() {
   const {signInGithub} = useAuth();
   const navigate = useNavigate();
-  const [suggestions, setSuggestion] = useState<Suggestions[]>([]);
+  const [suggestions, setSuggestion] = useState<Suggestion[]>([]);
 
   const {
     register,
@@ -46,7 +43,7 @@ export default function Search() {
   const onSubmit = (data: IFormInput) => {
     try {
       for (const match of suggestions){
-        if (match.name.startsWith(data.search)) return navigate(`/portfolio/${match.name}`);
+        if (match.name.startsWith(data.search)) return navigate(`/portfolio/${match.uid}`);
       }
       return setError("search", { type:"server", message:"O nome que você digitou não está cadastrado!" })
     } catch (error) {
@@ -61,10 +58,10 @@ export default function Search() {
       if (user) {
         const nameInSuggestions = suggestions.find(({name}) => name === user.displayName)  
         if (!nameInSuggestions) {
-          suggestions.push({name:user.displayName as string});
+          suggestions.push({name:user.displayName as string, uid: user.providerData[0].uid});
           localStorage.setItem('desafio-03',JSON.stringify(suggestions));
         }
-        navigate("/portfolio");
+        navigate(`/portfolio/${user.providerData[0].uid}`);
       }
     } catch (error) {
       console.log(error);

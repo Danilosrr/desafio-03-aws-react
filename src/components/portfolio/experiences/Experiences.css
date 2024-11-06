@@ -1,0 +1,90 @@
+.experienceSection {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #004346;
+    box-sizing: border-box;
+    padding: 32px 128px;
+    width: 100vw;
+    gap: 42px;
+
+    button,
+    h2,
+    h3,
+    h4,
+    p,
+    b {
+        font-family: "Roboto", sans-serif;
+        line-height: 130%;
+        color: #FFF;
+    }
+
+    h2 {
+        font-size: 32px;
+        font-weight: 800;
+    }
+
+    .carousel {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 24px;
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            background-color: #508991;
+            padding: 22px;
+            gap: 10px;
+
+            box-shadow: 4px 5px 0px 0px #09BC8A;
+            border: #172A3A solid 2px;
+            border-radius: 14px;
+
+            h3 {
+                font-size: 22px;
+                font-weight: 800;
+            }
+
+            h4 {
+                font-size: 14px;
+                font-weight: 600;
+                color: #D1D5DB;
+            }
+
+            span {
+                display: flex;
+                gap: 10px;
+
+                b {
+                    padding: 8px;
+                    background-color: #172A3A;
+                    border-radius: 4px;
+                    font-size: 10px;
+                    font-weight: 700;
+                }
+            }
+
+            button {
+                background-color: #172A3A;
+                border-radius: 6px;
+                border: none;
+                height: 40px;
+                font-weight: 700;
+            }
+
+            button:hover {
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .experienceSection {
+        .carousel {
+            grid-template-columns: 1fr;
+        }
+    }
+}
