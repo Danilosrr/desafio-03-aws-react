@@ -1,6 +1,7 @@
 import NavBar from "./navBar/NavBar";
 import About from "./about/About";
 import Experiences from "./experiences/Experiences";
+import Footer from "./footer/Footer";
 import { useParams } from "react-router-dom";
 import { GithubUserData } from "../../interfaces/github";
 import { useEffect, useState } from "react";
@@ -36,6 +37,7 @@ export default function Portfolio() {
         email={data?.email}
       />
       <Experiences />
+      <Footer />
     </>
   );
 }
