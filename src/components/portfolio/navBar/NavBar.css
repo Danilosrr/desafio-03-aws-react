@@ -1,4 +1,5 @@
 .portfolioNav {
+    z-index: 1;
     position: fixed;
     background-color: #172A3A;
     font-family: "Roboto", sans-serif;
