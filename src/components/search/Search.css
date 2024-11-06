@@ -154,6 +154,10 @@ input {
         font-weight: 600;
         border-bottom: #D6D6D6 solid 1px;
     }
+    li:hover {
+        cursor: pointer;
+        color: #18191F;
+    }
 
 }
 .suggestions:empty {
