@@ -43,7 +43,7 @@ export default function Search() {
   const onSubmit = (data: IFormInput) => {
     try {
       for (const match of suggestions){
-        if (match.name.startsWith(data.search)) return navigate(`/portfolio/${match.name}`);
+        if (match.name.startsWith(data.search)) return navigate(`/portfolio/${match.uid}`);
       }
       return setError("search", { type:"server", message:"O nome que você digitou não está cadastrado!" })
     } catch (error) {
