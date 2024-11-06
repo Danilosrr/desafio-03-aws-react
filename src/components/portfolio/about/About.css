@@ -16,7 +16,7 @@
 
     .aboutUser {
         margin: auto;
-        
+
         figure {
             gap: 16px;
             display: flex;
@@ -27,7 +27,7 @@
 
         b {
             font-size: 32px;
-            font-weight: 800;        
+            font-weight: 800;
         }
 
         p {
@@ -36,11 +36,11 @@
         }
 
         .portrait {
-            width: 256px;
-            height: 256px;
+            width: 170px;
+            height: 170px;
             border-radius: 50%;
             overflow: hidden;
-            background-color:#09BC8A;
+            background-color: #09BC8A;
             border: #172A3A solid 2px;
             box-shadow: 4px 5px 0px 0px #172A3A;
 
@@ -90,6 +90,85 @@
 
             button:hover {
                 cursor: pointer;
+            }
+        }
+    }
+}
+
+.aboutTextArea {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 0 32px 64px 32px;
+    width: 100%;
+
+    h2, textarea {
+        font-family: "Roboto", sans-serif;
+        line-height: 130%;
+        color: #FFF;
+    }
+
+    h2 {
+        font-size: 32px;
+        font-weight: 800;
+    }
+
+    article {
+        width: 100%;
+        padding: 32px;
+        background-color: #508991;
+        box-sizing: border-box;
+        border-radius: 14px;
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: auto 200px;
+        gap: 32px;
+
+        textarea {
+            background-color: transparent;
+            overflow-y: scroll;
+            border: none;
+            resize: none;
+        }
+        textarea::-webkit-scrollbar{
+            display: block;
+            width: 5px;
+        }
+        textarea::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        textarea::-webkit-scrollbar-thumb {
+            background-color:#09BC8A;
+            border-right: none;
+            border-left: none;
+        }
+    }
+}
+
+@media (max-width: 768px){
+    .aboutUser, .aboutPitch, .aboutTextArea{
+        h2, b {
+            font-size: 22px !important;
+        }
+    }
+
+    .aboutPitch {
+        align-items: flex-start !important;
+
+        p {
+            padding: 10px;
+        }
+
+        span {
+            display: grid !important;
+            align-self: flex-end;
+            grid-template-columns: 100%;
+
+            button {
+                width: 100px;
+                font-size: 12px !important;
             }
         }
     }

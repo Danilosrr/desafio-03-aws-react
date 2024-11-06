@@ -1,0 +1,26 @@
+#root {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    scrollbar-gutter: stable both-edges;
+}
+
+#root::-webkit-scrollbar {
+    display: block;
+    width: 5px;
+}
+
+#root::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#root::-webkit-scrollbar-thumb {
+    background-color: #09BC8A;
+    border-right: none;
+    border-left: none;
+}
