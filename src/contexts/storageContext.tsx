@@ -1,17 +1,17 @@
 import React, { ReactNode, useContext, useEffect, useState } from "react";
-import { Suggestion } from "../interfaces/search";
+import { InfoUser, Suggestion } from "../interfaces/search";
 
 const StorageContext = React.createContext<IStorageContext>(
   {} as IStorageContext
 );
 
 interface IStorageContext {
-  suggestions: Suggestion[];
-  addSuggestion: (item: Suggestion) => void;
-  getUserData: () => void;
+  userData: InfoUser[];
+  addUserData: (item: InfoUser) => void;
+  getUserData: (uid:string) => void;
   editUserData: () => void;
   editable: boolean;
-  setEditable: React.Dispatch<React.SetStateAction<boolean>>
+  setEditable: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export function useStorage() {
@@ -21,7 +21,7 @@ export function useStorage() {
 export function StorageProvider({
   children,
 }: Readonly<{ children: ReactNode }>) {
-  const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
+  const [userData, setUserData] = useState<InfoUser[]>([]);
   const [editable, setEditable] = useState<boolean>(false);
   const localKey = "desafio-03";
 
@@ -29,22 +29,19 @@ export function StorageProvider({
     const storedData = localStorage.getItem(localKey);
     if (storedData) {
       if (JSON.parse(storedData) instanceof Array) {
-        const array = JSON.parse(storedData).map((el: Suggestion) => {
-          return {
-            name: el.name,
-            uid: el.uid,
-          };
+        const array = JSON.parse(storedData).map((el: InfoUser) => {
+          return { ...el };
         });
-        setSuggestions(array);
+        setUserData(array);
       }
     }
   }
 
-  async function addSuggestion(newItem: Suggestion) {
-    setSuggestions(suggestions.concat([newItem]));
+  async function addUserData(newItem: InfoUser) {
+    setUserData(userData.concat([newItem]));
   }
 
-  function getUserData() {
+  function getUserData(uid:string) {
     return;
   }
 
@@ -57,20 +54,19 @@ export function StorageProvider({
   }, []);
 
   useEffect(() => {
-    console.log('state changed')
-    localStorage.setItem(localKey, JSON.stringify(suggestions));
-  }, [suggestions])
+    console.log("state changed");
+    localStorage.setItem(localKey, JSON.stringify(userData));
+  }, [userData]);
 
   return (
     <StorageContext.Provider
       value={{
-        suggestions,
-        //userData,
-        addSuggestion,
+        userData,
+        addUserData,
         getUserData,
         editUserData,
         editable,
-        setEditable
+        setEditable,
       }}
     >
       {children}
