@@ -22,3 +22,5 @@ export interface InfoUser extends Suggestion {
   bio: string | null;
   pitch: string | null;
 }
+
+export type enumKeys = "title"|"period"|"technologies"|"summary"|"link"|"linkedin"|"youtube"|"twitter"|"instagram"|"facebook";
