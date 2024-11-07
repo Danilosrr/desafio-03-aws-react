@@ -1,8 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useRef } from "react";
 import "./Modal.css";
-
-type enumKeys = "title"|"period"|"technologies"|"summary"|"link"|"linkedin"|"youtube"|"twitter"|"instagram"|"facebook";
+import { enumKeys } from "../../interfaces/search";
 
 interface Props {
   isOpen: boolean;
