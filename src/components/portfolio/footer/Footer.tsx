@@ -2,18 +2,23 @@ import { BsInstagram, BsFacebook, BsTwitter, BsYoutube } from "react-icons/bs";
 import { IoMdPin } from "react-icons/io";
 import "./Footer.css";
 import { EditDot } from "../editButton/EditButton";
+import { useStorage } from "../../../contexts/storageContext";
 
 interface Props {
   email?: string
 }
 
 export default function Footer({email}:Readonly<Props>) {
+  const { editable } = useStorage();
+  
+  const showEmail = (email || editable)
+  
   return (
     <section className="contactSection" id="contact">
-      {email && (
+      {showEmail && (
         <article className="email">
           <b>Sinta-se livre para me contatar a qualquer momento!</b>
-          <h5>{email}</h5>
+          {editable?<input value={email}/>:<h5>{email}</h5>}
         </article>
       )}
       <article className="socials">

@@ -6,9 +6,17 @@
     box-sizing: border-box;
     width: 100vw;
 
+    input {
+        all: unset;
+        border-bottom: #FFF solid 3px;
+        max-width: 500px;
+        margin: auto;
+    }
+
     b,
     h5,
     span,
+    input,
     p {
         font-family: "Roboto", sans-serif;
         line-height: 130%;
@@ -19,7 +27,7 @@
         font-weight: 800;
     }
 
-    h5 {
+    h5,input {
         font-size: 28px;
         font-weight: 800;
     }
@@ -98,7 +106,7 @@
             font-size: 14px;
         }
         .email {
-            h5 {
+            h5,input {
                 font-size: 18px;
             }
         }
