@@ -13,7 +13,7 @@ interface IFormInput {
 }
 
 export default function Search() {
-  const { suggestions, addSuggestion } = useStorage();
+  const { userData, addUserData } = useStorage();
   const { signInGithub } = useAuth();
   const navigate = useNavigate();
 
@@ -29,7 +29,7 @@ export default function Search() {
 
   const onSubmit = (data: IFormInput) => {
     try {
-      for (const match of suggestions) {
+      for (const match of userData) {
         if (match.name.startsWith(data.search))
           navigate(`/portfolio/${match.uid}`);
       }
@@ -47,13 +47,22 @@ export default function Search() {
     try {
       const user = await signInGithub();
       if (user) {
-        const nameInSuggestions = suggestions.find(
+        const nameInSuggestions = userData.find(
           ({ name }) => name === user.displayName
         );
         if (!nameInSuggestions) {
-          addSuggestion({
+          addUserData({
             name: user.displayName as string,
             uid: user.providerData[0].uid,
+            linkedin: "",
+            youtube: "",
+            facebook: "",
+            twitter: "",
+            instagram: "",
+            email: "",
+            experiences: [],
+            bio: "",
+            pitch: "",
           });
         }
         navigate(`/portfolio/${user.providerData[0].uid}`);
@@ -81,10 +90,15 @@ export default function Search() {
             <FaArrowRight size={25} />
           </button>
           <ul className="suggestions" hidden={false}>
-            {suggestions.map(({ name,uid }) => {
+            {userData.map(({ name, uid }) => {
               if (search && name.startsWith(search)) {
                 return (
-                  <li key={name} onClick={()=>{navigate(`/portfolio/${uid}`);}}>
+                  <li
+                    key={name}
+                    onClick={() => {
+                      navigate(`/portfolio/${uid}`);
+                    }}
+                  >
                     <IoPersonSharp size={16} />
                     <p className="label">{name}</p>
                   </li>
