@@ -33,7 +33,7 @@ export default function Portfolio() {
       setStoredUser(storedUser);
       console.log(storedUser);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
 
@@ -58,8 +58,8 @@ export default function Portfolio() {
         pitch={gitUser?.bio}
         bio={storedUser?.bio}
       />
-      <Experiences />
-      <Footer email={storedUser?.email}/>
+      <Experiences data={storedUser ? storedUser.experiences : []} />
+      <Footer email={storedUser?.email} />
     </>
   );
 }

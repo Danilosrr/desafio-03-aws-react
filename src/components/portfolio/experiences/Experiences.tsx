@@ -2,42 +2,21 @@ import { RiEditFill, RiDeleteBin7Fill, RiAddCircleLine } from "react-icons/ri";
 import { useStorage } from "../../../contexts/storageContext";
 import { Experience } from "../../../interfaces/search";
 import Modal from "../../modal/Modal";
-import "./Experiences.css";
 import { useState } from "react";
+import "./Experiences.css";
 
-const mock: Experience[] = [
-  {
-    title: "Dev junior na NASA 1",
-    period: "Junho - 2002 - 2020",
-    technologies: ["Figma", "React", "Typescript"],
-    summary: `Um projetão fellas da minha cidade que é muito fellas, um projeto tão
-      fellas que não deixa de ser fellas, um projetinho fellas feito pra ser
-      fellas, agora continuarei escrevendo pra ocupar espaço.`,
-    link: "url",
-  },
-  {
-    title: "Dev junior na NASA 2",
-    period: "Junho - 2002 - 2020",
-    technologies: ["Figma", "React", "Typescript"],
-    summary: `Um projetão fellas da minha cidade que é muito fellas, um projeto tão
-      fellas que não deixa de ser fellas, um projetinho fellas feito pra ser
-      fellas, agora continuarei escrevendo pra ocupar espaço.`,
-    link: "",
-  },
-  {
-    title: "Dev junior na NASA 3",
-    period: "Junho - 2002 - 2020",
-    technologies: ["Figma", "React", "Typescript"],
-    summary: `Um projetão fellas da minha cidade que é muito fellas, um projeto tão
-      fellas que não deixa de ser fellas, um projetinho fellas feito pra ser
-      fellas, agora continuarei escrevendo pra ocupar espaço.`,
-    link: "",
-  }
-];
+interface Props {
+  data: Experience[]
+}
 
-export default function Experiences() {
+export default function Experiences({data}:Readonly<Props>) {
   const { editable } = useStorage();
   const [modal, setModal] = useState<boolean>(false);
+
+  const addCardButton = (data.length !== 4 && editable)
+  const emptyCase = (data.length == 0 && !editable )
+
+  console.log(addCardButton,emptyCase)
 
   const editCard = () => {
     setModal(true);
@@ -51,7 +30,7 @@ export default function Experiences() {
     <section className="experienceSection" id="exp">
       <h2>Experiências</h2>
       <div className="carousel">
-        {mock.map(({ title, period, technologies, summary, link }) => {
+        {!!data.length && data.map(({ title, period, technologies, summary, link }) => {
           return (
             <article className="card" key={title}>
               <div className="cardContent">
@@ -78,7 +57,8 @@ export default function Experiences() {
             </article>
           );
         })}
-        {mock.length === 3 && editable && (
+        {emptyCase && <p className="emptyWarning">Não há nada por aqui!</p> }
+        {addCardButton && (
           <article className="card">
             <div className="addCard">
               <RiAddCircleLine size={72} />
