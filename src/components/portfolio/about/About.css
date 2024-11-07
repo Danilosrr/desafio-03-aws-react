@@ -153,11 +153,15 @@
             font-size: 22px !important;
         }
     }
+    .aboutUser .portrait {
+        width: 120px !important;
+        height: 120px !important;
+    }
 
     .aboutPitch {
-        align-items: flex-start !important;
+        align-items: center !important;
 
-        p {
+        p, h2 {
             padding: 0  0 0 20px;
         }
 
