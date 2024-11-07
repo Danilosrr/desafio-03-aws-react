@@ -13,9 +13,9 @@
 
     font-family: "Roboto", sans-serif;
     line-height: 130%;
-    color: #18191F;
-
+    
     h2 {
+        color: #18191F !important;
         font-size: 32px;
         font-weight: 800;
     }
@@ -38,7 +38,7 @@
         input {
             padding-left: 12px;
             width: 100%;
-            min-width: 250px;
+            min-width: 300px;
         }
         input::placeholder {
             font-size: 16px;
@@ -51,6 +51,7 @@
         button {
             font-size: 16px;
             font-weight: 600;
+            transition: background-color 250ms ease-in-out;
         }
         button:hover {
             cursor: pointer;
@@ -62,13 +63,33 @@
             gap: 12px;
 
             .saveButton {
+                border: none;
                 color: #FFF;
                 background-color: #172A3A;
             }
+            .saveButton:disabled{
+                background: #D1D5DB;
+            }   
+
             .cancelButton {
+                color: #172A3A;
                 background-color: #FFF;
+            }
+            .cancelButton:hover {
+                color: #FFF;
+                background-color: #992020;
             }
         }
     }
 }
 
+@media (max-width: 768px) {
+    .modal {
+        form {
+            padding: 20px;
+            input {
+                width: 100%;
+            }
+        }
+    }
+}

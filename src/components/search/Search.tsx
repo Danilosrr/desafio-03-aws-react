@@ -22,7 +22,7 @@ export default function Search() {
     setError,
     watch,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<IFormInput>();
 
   const search = watch("search");
@@ -77,7 +77,7 @@ export default function Search() {
               },
             })}
           />
-          <button className="primary" type="submit" disabled={!search}>
+          <button className="primary" type="submit" disabled={!isValid}>
             <FaArrowRight size={25} />
           </button>
           <ul className="suggestions" hidden={false}>

@@ -1,16 +1,31 @@
 import { useForm } from "react-hook-form";
-import "./Modal.css";
 import { useRef } from "react";
+import "./Modal.css";
+
+type enumKeys = "title"|"period"|"technologies"|"summary"|"link"|"linkedin"|"youtube"|"twitter"|"instagram"|"facebook";
 
 interface Props {
   isOpen: boolean;
   setState: React.Dispatch<React.SetStateAction<boolean>>;
-  keys: { name: string; required: boolean }[];
+  keys: { name: enumKeys; required: boolean }[];
   title?: string;
 }
 
 interface IModalInput {
   [name: string]: string;
+}
+
+const placeholders= {
+  title:'Título',
+  period: 'Período de atuação',
+  technologies: 'Habilidades (separe-as por vírgula)',
+  summary: 'Descreva sua experiência',
+  link: 'Link do repositório (Opcional)',
+  linkedin: 'Digite a URL',
+  youtube: 'Digite a URL',
+  twitter: 'Digite a URL',
+  instagram: 'Digite a URL',
+  facebook: 'Digite a URL',
 }
 
 export default function Modal({ isOpen, setState, keys, title }: Readonly<Props>) {
@@ -19,9 +34,9 @@ export default function Modal({ isOpen, setState, keys, title }: Readonly<Props>
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors,isValid },
   } = useForm();
-
+  
   const cancel = () => {
     setState(false);
   };
@@ -41,10 +56,9 @@ export default function Modal({ isOpen, setState, keys, title }: Readonly<Props>
         {keys.map(({ name, required }) => {
           return (
             <input
-              placeholder={name}
+              placeholder={placeholders[name]}
               key={name}
               {...register(name, {
-                value: "name",
                 required: {
                   value: required,
                   message: `preencha o campo ${name}`,
@@ -57,7 +71,7 @@ export default function Modal({ isOpen, setState, keys, title }: Readonly<Props>
           <button
             type="submit"
             className="saveButton"
-            disabled={!!Object.keys(errors).length}
+            disabled={!isValid}
           >
             Salvar
           </button>
