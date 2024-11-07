@@ -67,6 +67,9 @@
                 align-items: center;
                 justify-content: center;
             }
+            .circle:hover {
+                cursor: pointer;
+            }
         }
     }
 

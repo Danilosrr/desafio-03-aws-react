@@ -75,14 +75,20 @@
             display: flex;
             align-items: center;
             justify-content: center;
+
+            p{
+                line-height: unset;       
+            }
         }
     }
-
+    
     .login {
         height: 32px;
     }
     button:hover {
         cursor: pointer;
+        background-color: #09BC8A;
+        transition: background-color 250ms ease-in-out;
     }
 }
 
@@ -90,7 +96,6 @@
 
 
 .primary,
-.secondary,
 input {
     box-sizing: border-box;
     border: #18191F solid 1px;
@@ -98,10 +103,13 @@ input {
 
 .primary {
     color: #FFF;
-    background: #D1D5DB;
+    background: #004346;
     border-radius: 10px;
     height: 40px;
     width: 55px;
+}
+.primary:disabled{
+    background: #D1D5DB;
 }
 
 .secondary {
@@ -110,6 +118,7 @@ input {
     width: 85px;
     height: 32px;
     border-radius: 16px;
+    border: none;
     gap: 6px;
 
     p {

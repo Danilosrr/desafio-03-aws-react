@@ -84,6 +84,7 @@
                 height: 46px;
                 padding: 0 20px;
                 border-radius: 12px;
+                border: none;
                 background-color: #172A3A;
 
                 box-shadow: 8px 7px 0px 0px #09BC8A;
@@ -91,6 +92,8 @@
 
             button:hover {
                 cursor: pointer;
+                background-color: #09BC8A;
+                transition: background-color 250ms ease-in-out;
             }
         }
     }
