@@ -1,13 +1,6 @@
-.editPageButton {
+.editPageButton,
+.editDot {
     z-index: 1;
-    position: fixed;
-    top: 72px;
-    right: 32px;
-
-    height: 54px;
-    width: 54px;
-    border-radius: 27px;
-
     display: flex;
     align-items: center;
     justify-content: center;
@@ -16,6 +9,25 @@
     color: #FFF;
 }
 
+.editPageButton {
+    position: fixed;
+    top: 72px;
+    right: 32px;
+    height: 54px;
+    width: 54px;
+    border-radius: 27px;
+}
+
+.editDot {
+    position: absolute;
+    top: -2px;
+    right: -5px;
+    height: 18px;
+    width: 18px;
+    border-radius: 9px;
+}
+
 .editPageButton:hover {
+    cursor: pointer;
     background-color: #09BC8A;
 }

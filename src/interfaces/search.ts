@@ -3,7 +3,7 @@ export interface Suggestion {
   uid: string;
 }
 
-export interface Experiences {
+export interface Experience {
   title: string;
   period: string;
   technologies: string[];
@@ -18,7 +18,7 @@ export interface InfoUser extends Suggestion {
   twitter: string | null;
   instagram: string | null;
   email: string | null;
-  experiences: Experiences[];
+  experiences: Experience[];
   bio: string | null;
   pitch: string | null;
 }

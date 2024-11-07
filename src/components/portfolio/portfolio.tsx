@@ -27,12 +27,12 @@ export default function Portfolio() {
 
   useEffect(() => {
     if (uid) getData(uid);
-  }, []);
+  }, [uid]);
 
   return (
     <>
       <NavBar />
-      {currentUser?.providerData[0].uid == uid && <EditButton />}
+      {currentUser?.providerData[0].uid === uid && <EditButton />}
       <About
         name={data?.name}
         img={data?.avatar_url}

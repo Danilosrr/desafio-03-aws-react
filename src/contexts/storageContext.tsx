@@ -7,10 +7,11 @@ const StorageContext = React.createContext<IStorageContext>(
 
 interface IStorageContext {
   suggestions: Suggestion[];
-  //userData: any;
   addSuggestion: (item: Suggestion) => void;
   getUserData: () => void;
   editUserData: () => void;
+  editable: boolean;
+  setEditable: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export function useStorage() {
@@ -21,7 +22,7 @@ export function StorageProvider({
   children,
 }: Readonly<{ children: ReactNode }>) {
   const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
-  //const [userData, setUserData] = useState<any>({});
+  const [editable, setEditable] = useState<boolean>(false);
   const localKey = "desafio-03";
 
   function loadStorage() {
@@ -68,6 +69,8 @@ export function StorageProvider({
         addSuggestion,
         getUserData,
         editUserData,
+        editable,
+        setEditable
       }}
     >
       {children}
