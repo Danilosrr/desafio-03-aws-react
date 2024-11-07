@@ -16,9 +16,6 @@
     button {
         all: unset;
     }
-    button:hover {
-        cursor: pointer;
-    }
 
     a,button {
         text-decoration: none;
@@ -27,6 +24,12 @@
         color: #FFF;
     }
 
+    a:hover, button:hover {
+        cursor: pointer;
+        color: #09BC8A;
+        transition: color 250ms ease-in-out;
+    }
+    
     .access,
     .exit, button {
         position: absolute;

@@ -30,4 +30,5 @@
 .editPageButton:hover {
     cursor: pointer;
     background-color: #09BC8A;
+    transition: background-color 250ms ease-in-out;
 }
