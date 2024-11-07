@@ -59,7 +59,7 @@ export default function Portfolio() {
         bio={storedUser?.bio}
       />
       <Experiences data={storedUser ? storedUser.experiences : []} />
-      <Footer email={storedUser?.email} />
+      <Footer email={storedUser?.email} uid={uid}/>
     </>
   );
 }

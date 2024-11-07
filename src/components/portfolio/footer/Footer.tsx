@@ -3,16 +3,35 @@ import { IoMdPin } from "react-icons/io";
 import "./Footer.css";
 import { EditDot } from "../editButton/EditButton";
 import { useStorage } from "../../../contexts/storageContext";
+import { useState } from "react";
+import Modal from "../../modal/Modal";
+import { openInNewTab } from "../../../utils/generics";
+
+type socialMedias = "linkedin" | "youtube" | "twitter" | "instagram" | "facebook";
 
 interface Props {
+  uid: string | undefined;
   email?: string
 }
 
-export default function Footer({email}:Readonly<Props>) {
-  const { editable } = useStorage();
+export default function Footer({email, uid}:Readonly<Props>) {
+  const [modal, setModal] = useState<boolean>(false);
+  const [socialMedia, setSocialMedia] = useState<socialMedias>("linkedin");
+  const { editable,getUserData } = useStorage();
   
   const showEmail = (email || editable)
   
+  const handleClick = (socialMedia:socialMedias) => {
+    if (editable) {
+      setSocialMedia(socialMedia);
+      setModal(true);  
+    } else {
+      if (uid && getUserData(uid)[socialMedia]) {
+        openInNewTab(getUserData(uid)[socialMedia])
+      }
+    }
+  }
+
   return (
     <section className="contactSection" id="contact">
       {showEmail && (
@@ -24,19 +43,19 @@ export default function Footer({email}:Readonly<Props>) {
       <article className="socials">
         <b>Assim que possível, me envie um email para que possamos trabalhar felizes juntos!</b>
         <div className="buttonGroup">
-          <figure className="circle">
+          <figure className="circle" onClick={()=>handleClick('instagram')}>
             <EditDot/>
             <BsInstagram size={22}/>
           </figure>
-          <figure className="circle">
+          <figure className="circle" onClick={()=>handleClick('facebook')}>
             <EditDot/>
             <BsFacebook size={22}/>
           </figure>
-          <figure className="circle">
+          <figure className="circle" onClick={()=>handleClick('twitter')}>
             <EditDot/>
             <BsTwitter size={22}/>
           </figure>
-          <figure className="circle">
+          <figure className="circle" onClick={()=>handleClick('youtube')}>
             <EditDot/>
             <BsYoutube size={22}/>
           </figure>
@@ -46,6 +65,7 @@ export default function Footer({email}:Readonly<Props>) {
         <span><IoMdPin />Brasil</span>
         <p>© 2024, All Rights By Compass UOL</p>
       </footer>
+      <Modal title={`Adicionar ${socialMedia}`} isOpen={modal} setState={setModal} keys={[{name: socialMedia, required:true}]}/>
     </section>
   );
 }
