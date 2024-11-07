@@ -1,7 +1,9 @@
 import { RiEditFill, RiDeleteBin7Fill, RiAddCircleLine } from "react-icons/ri";
 import { useStorage } from "../../../contexts/storageContext";
 import { Experience } from "../../../interfaces/search";
+import Modal from "../../modal/Modal";
 import "./Experiences.css";
+import { useState } from "react";
 
 const mock: Experience[] = [
   {
@@ -35,9 +37,10 @@ const mock: Experience[] = [
 
 export default function Experiences() {
   const { editable } = useStorage();
+  const [modal, setModal] = useState<boolean>(false);
 
   const editCard = () => {
-    console.log("edit");
+    setModal(true);
   };
 
   const deleteCard = () => {
@@ -64,11 +67,11 @@ export default function Experiences() {
               </div>
               {editable && (
                 <div className="cardButtons">
-                  <span className="edit">
-                    <RiEditFill size={64} onClick={editCard} />
+                  <span className="edit" onClick={editCard}>
+                    <RiEditFill size={64} />
                   </span>
-                  <span className="delete">
-                    <RiDeleteBin7Fill size={64} onClick={deleteCard} />
+                  <span className="delete" onClick={deleteCard} >
+                    <RiDeleteBin7Fill size={64} />
                   </span>
                 </div>
               )}
@@ -84,6 +87,18 @@ export default function Experiences() {
           </article>
         )}
       </div>
+      <Modal
+        title="Criação de card"
+        isOpen={modal}
+        setState={setModal}
+        keys={[
+          { name: "title", required: true },
+          { name: "period", required: true },
+          { name: "technologies", required: true },
+          { name: "summary", required: true },
+          { name: "link", required: false },
+        ]}
+      />
     </section>
   );
 }

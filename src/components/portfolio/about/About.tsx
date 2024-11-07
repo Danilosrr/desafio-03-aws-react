@@ -1,5 +1,7 @@
 import { openInNewTab } from "../../../utils/generics";
+import { useState } from "react";
 import { EditDot } from "../editButton/EditButton";
+import Modal from "../../modal/Modal";
 import "./About.css";
 
 interface Props {
@@ -17,6 +19,8 @@ export default function About({
   name,
   img,
 }: Readonly<Props>) {
+  const [modal,setModal] = useState<boolean>(false)
+
   return (
     <>
       <section className="aboutSection" id="user">
@@ -37,7 +41,7 @@ export default function About({
             </p>
             <span>
             <button onClick={() => openInNewTab(`https://github.com/${login}`)}>Github</button>
-            <button>LinkedLn<EditDot/></button>
+            <button onClick={() => setModal(true)}>LinkedLn<EditDot/></button>
             </span>
         </aside>
       </section>
@@ -47,6 +51,14 @@ export default function About({
             <textarea></textarea> 
         </article>
       </section>
+      <Modal
+        title="Adicionar link"
+        isOpen={modal}
+        setState={setModal}
+        keys={[
+          { name: "linkedin", required: true },
+        ]}
+      />
     </>
   );
 }
