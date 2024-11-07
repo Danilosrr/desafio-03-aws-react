@@ -1,5 +1,5 @@
 import React, { ReactNode, useContext, useEffect, useState } from "react";
-import { InfoUser, Suggestion } from "../interfaces/search";
+import { InfoUser } from "../interfaces/search";
 
 const StorageContext = React.createContext<IStorageContext>(
   {} as IStorageContext
@@ -8,7 +8,7 @@ const StorageContext = React.createContext<IStorageContext>(
 interface IStorageContext {
   userData: InfoUser[];
   addUserData: (item: InfoUser) => void;
-  getUserData: (uid:string) => void;
+  getUserData: (uid: string) => InfoUser;
   editUserData: () => void;
   editable: boolean;
   setEditable: React.Dispatch<React.SetStateAction<boolean>>;
@@ -41,8 +41,8 @@ export function StorageProvider({
     setUserData(userData.concat([newItem]));
   }
 
-  function getUserData(uid:string) {
-    return;
+  function getUserData(id: string) {
+    return userData.filter(({ uid }) => uid == id)[0];
   }
 
   function editUserData() {

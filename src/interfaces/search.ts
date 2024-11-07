@@ -12,13 +12,13 @@ export interface Experience {
 }
 
 export interface InfoUser extends Suggestion {
-  linkedin: string | null;
-  youtube: string | null;
-  facebook: string | null;
-  twitter: string | null;
-  instagram: string | null;
-  email: string | null;
+  linkedin: string;
+  youtube: string ;
+  facebook: string;
+  twitter: string;
+  instagram: string;
+  email: string;
   experiences: Experience[];
-  bio: string | null;
-  pitch: string | null;
+  bio: string;
+  pitch: string;
 }

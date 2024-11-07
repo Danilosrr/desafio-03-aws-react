@@ -3,8 +3,11 @@ import { IoMdPin } from "react-icons/io";
 import "./Footer.css";
 import { EditDot } from "../editButton/EditButton";
 
-export default function Footer() {
-  const email = "danilo_srr@hotmail.com";
+interface Props {
+  email?: string
+}
+
+export default function Footer({email}:Readonly<Props>) {
   return (
     <section className="contactSection" id="contact">
       {email && (

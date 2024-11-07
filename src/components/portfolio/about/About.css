@@ -6,12 +6,19 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
 
+    input{
+        all: unset;
+        width: fit-content;
+        border-bottom: #18191F solid 3px;
+        max-width: 250px;
+    }
+
     h2,
     b,
+    input,
     p {
         font-family: "Roboto", sans-serif;
         line-height: 130%;
-        color: #18191F;
     }
 
     .aboutUser {
@@ -25,7 +32,7 @@
             align-items: center;
         }
 
-        b {
+        b, input {
             font-size: 32px;
             font-weight: 800;
         }
@@ -53,7 +60,7 @@
     .aboutPitch {
         display: flex;
         flex-direction: column;
-        align-items: flex-end;
+        max-width: 320px;
         margin: auto;
         gap: 20px;
 
@@ -62,18 +69,18 @@
             font-weight: 800;
         }
 
-        b {
+        b, input {
             color: #09BC8A;
         }
 
         p {
-            max-width: 250px;
             font-size: 12px;
             font-weight: 600;
         }
 
         span {
             display: flex;
+            width: 100%;
             gap: 18px;
 
             button {
@@ -82,7 +89,7 @@
                 font-size: 16px;
                 font-weight: 700;
                 height: 46px;
-                padding: 0 24px;
+                padding: 0 28px;
                 border-radius: 12px;
                 border: none;
                 background-color: #172A3A;
@@ -117,6 +124,14 @@
     h2 {
         font-size: 32px;
         font-weight: 800;
+    }
+
+    textarea {
+        font-size: 16px;
+        font-weight: 700;
+    }
+    textarea::placeholder{
+        color: #D1D5DB;
     }
 
     article {
@@ -163,17 +178,9 @@
         h2,b {
             font-size: 22px !important;
         }
-        
 
         .aboutPitch {
-            align-items: center !important;
-
-            p,
-            h2 {
-                padding: 0 0 0 20px;
-            }
-
-
+            padding: 0 20px;
         }
     }
 }

@@ -5,43 +5,61 @@ import Footer from "./footer/Footer";
 import EditButton from "./editButton/EditButton";
 import { useParams } from "react-router-dom";
 import { GithubUserData } from "../../interfaces/github";
+import { InfoUser } from "../../interfaces/search";
 import { useEffect, useState } from "react";
 import { getUserInfo } from "../../utils/Api";
 import { useAuth } from "../../contexts/authContext";
+import { useStorage } from "../../contexts/storageContext";
 
 export default function Portfolio() {
-  const [data, setData] = useState<GithubUserData | null>(null);
+  const [gitUser, setGitUser] = useState<GithubUserData | null>(null);
+  const [storedUser, setStoredUser] = useState<InfoUser | null>(null);
   const { currentUser } = useAuth();
+  const { getUserData } = useStorage();
   const { uid } = useParams();
 
-  async function getData(uid: string) {
+  async function getGit(uid: string) {
     try {
-      const request = await getUserInfo(uid);
-      setData(request);
-      console.log(request);
-      return request;
+      const git = await getUserInfo(uid);
+      setGitUser(git);
+      console.log(git);
     } catch (error) {
       console.log(error);
     }
   }
+  function getStored(uid: string) {
+    try {
+      const storedUser = getUserData(uid);
+      setStoredUser(storedUser);
+      console.log(storedUser);
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   useEffect(() => {
-    if (uid) getData(uid);
-  }, [uid]);
+    if (uid) getGit(uid);
+  }, []);
+
+  useEffect(() => {
+    if (uid) getStored(uid);
+  }, [storedUser]);
 
   return (
     <>
       <NavBar />
       {currentUser?.providerData[0].uid === uid && <EditButton />}
       <About
-        name={data?.name}
-        img={data?.avatar_url}
-        login={data?.login}
-        location={data?.location}
-        email={data?.email}
+        name={storedUser?.name}
+        img={gitUser?.avatar_url}
+        login={gitUser?.login}
+        location={gitUser?.location}
+        email={gitUser?.email}
+        pitch={gitUser?.bio}
+        bio={storedUser?.bio}
       />
       <Experiences />
-      <Footer />
+      <Footer email={storedUser?.email}/>
     </>
   );
 }
