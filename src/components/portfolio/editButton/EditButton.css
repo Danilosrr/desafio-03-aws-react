@@ -1,0 +1,21 @@
+.editPageButton {
+    z-index: 1;
+    position: fixed;
+    top: 72px;
+    right: 32px;
+
+    height: 54px;
+    width: 54px;
+    border-radius: 27px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #508991;
+    color: #FFF;
+}
+
+.editPageButton:hover {
+    background-color: #09BC8A;
+}

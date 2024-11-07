@@ -1,0 +1,74 @@
+.modal {
+    z-index: 99;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #6d6d6d96;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: "Roboto", sans-serif;
+    line-height: 130%;
+    color: #18191F;
+
+    h2 {
+        font-size: 32px;
+        font-weight: 800;
+    }
+
+    form {
+        background-color: #FFF;
+        display: grid;
+        grid-template-columns: 1fr;
+        border-radius: 18px;
+        padding: 42px;
+        gap: 22px;
+
+        input, button {
+            box-sizing: border-box;
+            border: #18191F solid 1px;
+            border-radius: 6px;
+            height: 36px;
+        }
+
+        input {
+            padding-left: 12px;
+            width: 100%;
+            min-width: 250px;
+        }
+        input::placeholder {
+            font-size: 16px;
+            font-weight: 600;
+            font-family: "Roboto", sans-serif;
+            line-height: 130%;
+            color: #D1D5DB;
+        }
+
+        button {
+            font-size: 16px;
+            font-weight: 600;
+        }
+        button:hover {
+            cursor: pointer;
+        }
+
+        .modalButtons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+
+            .saveButton {
+                color: #FFF;
+                background-color: #172A3A;
+            }
+            .cancelButton {
+                background-color: #FFF;
+            }
+        }
+    }
+}
+
