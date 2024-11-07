@@ -1,4 +1,5 @@
 import { openInNewTab } from "../../../utils/generics";
+import { EditDot } from "../editButton/EditButton";
 import "./About.css";
 
 interface Props {
@@ -36,7 +37,7 @@ export default function About({
             </p>
             <span>
             <button onClick={() => openInNewTab(`https://github.com/${login}`)}>Github</button>
-            <button>LinkedLn</button>
+            <button>LinkedLn<EditDot/></button>
             </span>
         </aside>
       </section>

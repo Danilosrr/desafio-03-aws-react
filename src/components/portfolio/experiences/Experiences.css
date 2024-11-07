@@ -116,7 +116,7 @@
 
         .card:hover{
             .cardContent{
-                visibility: hidden;
+                z-index: -1;
             }
             .cardButtons {
                 display: grid;
@@ -137,6 +137,13 @@
             h3 {
                 font-weight: 800;
                 font-size: 22px;
+            }
+        }
+        .addCard:hover {
+            cursor: pointer;
+            color: #09BC8A;
+            h3 {
+                color: inherit;
             }
         }
     }
