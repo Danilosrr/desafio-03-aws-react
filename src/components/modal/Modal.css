@@ -70,6 +70,9 @@
                 color: #FFF;
                 background-color: #172A3A;
             }
+            .saveButton:hover {
+                background-color: #09BC8A;
+            }
             .saveButton:disabled{
                 background: #D1D5DB;
             }   

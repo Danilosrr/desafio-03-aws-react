@@ -62,7 +62,7 @@ export default function Modal({ uid,index, setState, keys }: Readonly<Props>) {
   };
 
   return (
-    <div className="modal" onClick={checkModal}>
+    <main className="modal" onClick={checkModal}>
       <form ref={modalRef} onSubmit={handleSubmit(onSubmit)}>
         <h2>Adicionar Link</h2>
         { typeof index == 'number' ?
@@ -115,6 +115,6 @@ export default function Modal({ uid,index, setState, keys }: Readonly<Props>) {
           </button>
         </span>
       </form>
-    </div>
+    </main>
   ) 
 }
