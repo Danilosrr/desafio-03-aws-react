@@ -2,7 +2,7 @@ import { RiEditFill, RiDeleteBin7Fill, RiAddCircleLine } from "react-icons/ri";
 import { useStorage } from "../../../contexts/storageContext";
 import { Experience } from "../../../interfaces/search";
 import Modal from "../../modal/Modal";
-import { useState } from "react";
+import { useReducer, useState } from "react";
 import "./Experiences.css";
 import { useParams } from "react-router-dom";
 
@@ -11,8 +11,9 @@ interface Props {
 }
 
 export default function Experiences({data}:Readonly<Props>) {
-  const { editable } = useStorage();
+  const { editable, deleteUserExperience } = useStorage();
   const [modal, setModal] = useState<boolean>(false);
+  const [, forceUpdate] = useReducer(x => x + 1, 0);
   const [index, setIndex] = useState<number>(0);
   const {uid} = useParams();
 
@@ -25,13 +26,15 @@ export default function Experiences({data}:Readonly<Props>) {
   };
 
   const editCard = (index:number) => {
-    console.log(index)
     setIndex(index);
     setModal(true);
   };
 
-  const deleteCard = () => {
-    console.log("delete");
+  const deleteCard = (index:number) => {
+    if (uid) {
+      deleteUserExperience(uid,index);
+      forceUpdate()
+    }
   };
 
   return (
@@ -57,7 +60,7 @@ export default function Experiences({data}:Readonly<Props>) {
                   <span className="edit" onClick={() => editCard(index)}>
                     <RiEditFill size={64} />
                   </span>
-                  <span className="delete" onClick={() => editCard(index)} >
+                  <span className="delete" onClick={() => deleteCard(index)} >
                     <RiDeleteBin7Fill size={64} />
                   </span>
                 </div>

@@ -11,6 +11,7 @@ interface IStorageContext {
   getUserData: (uid: string) => InfoUser;
   editUserData: (uid: string, prop: Object) => void;
   editUserExperience: (uid: string, index:number, prop: Object) => void;
+  deleteUserExperience: (uid: string, index:number) => void;
   editable: boolean;
   setEditable: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -75,9 +76,18 @@ export function StorageProvider({
         userData[i].experiences[index] = edit; 
       }
       localStorage.setItem(localKey, JSON.stringify(userData));
-      return edit;
     }
-    localStorage.setItem(localKey, JSON.stringify(userData));
+  }
+
+  function deleteUserExperience(id: string, index:number) {
+    const user = getUserData(id);
+    if (user) {
+      const i = userData.findIndex((el) => el.uid === user.uid);
+      if (i !== -1) { 
+        userData[i].experiences.splice(index,1);
+      }
+      localStorage.setItem(localKey, JSON.stringify(userData));
+    }
   }
 
   useEffect(() => {
@@ -92,6 +102,7 @@ export function StorageProvider({
         getUserData,
         editUserData,
         editUserExperience,
+        deleteUserExperience,
         editable,
         setEditable,
       }}

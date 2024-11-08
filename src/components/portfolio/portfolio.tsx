@@ -41,9 +41,9 @@ export default function Portfolio() {
   }, []);
 
   useEffect(() => {
-    console.log(storedUser?.experiences)
+    console.log(storedUser)
     if (uid) getStored(uid);
-  }, [storedUser,getUserData]);
+  }, [storedUser]);
 
   return (
     <>
