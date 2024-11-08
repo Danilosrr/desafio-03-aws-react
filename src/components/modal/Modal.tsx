@@ -1,13 +1,14 @@
 import { useForm } from "react-hook-form";
 import { useRef } from "react";
 import "./Modal.css";
-import { enumKeys } from "../../interfaces/search";
+import { enumSocials } from "../../interfaces/search";
+import { useStorage } from "../../contexts/storageContext";
 
 interface Props {
+  uid?: string;
   isOpen: boolean;
   setState: React.Dispatch<React.SetStateAction<boolean>>;
-  keys: { name: enumKeys; required: boolean }[];
-  title?: string;
+  keys: { name: enumSocials; required: boolean }[];
 }
 
 interface IModalInput {
@@ -27,21 +28,27 @@ const placeholders= {
   facebook: 'Digite a URL',
 }
 
-export default function Modal({ isOpen, setState, keys, title }: Readonly<Props>) {
+export default function Modal({ uid, isOpen, setState, keys }: Readonly<Props>) {
   const modalRef = useRef<HTMLFormElement>(null);
+  const { getUserData,editUserData} = useStorage();
 
   const {
+    reset,
     register,
     handleSubmit,
-    formState: { errors,isValid },
+    formState: { isValid },
   } = useForm();
   
   const cancel = () => {
+    reset();
     setState(false);
   };
 
   const onSubmit = (data: IModalInput) => {
-    console.log("submit", data);
+    if (uid) {
+      editUserData(uid,data);
+      setState(false);
+    }
   };
 
   const checkModal = (e: React.MouseEvent) => {
@@ -51,10 +58,12 @@ export default function Modal({ isOpen, setState, keys, title }: Readonly<Props>
   return isOpen ? (
     <div className="modal" onClick={checkModal}>
       <form ref={modalRef} onSubmit={handleSubmit(onSubmit)}>
-        {title && <h2>{title}</h2>}
+        <h2>Adicionar Link</h2>
         {keys.map(({ name, required }) => {
+          const input = uid && getUserData(uid)[name]
           return (
             <input
+              defaultValue={input}
               placeholder={placeholders[name]}
               key={name}
               {...register(name, {

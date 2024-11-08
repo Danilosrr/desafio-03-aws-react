@@ -9,7 +9,7 @@ interface IStorageContext {
   userData: InfoUser[];
   addUserData: (item: InfoUser) => void;
   getUserData: (uid: string) => InfoUser;
-  editUserData: () => void;
+  editUserData: (uid: string, prop: Object) => void;
   editable: boolean;
   setEditable: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -29,34 +29,43 @@ export function StorageProvider({
     const storedData = localStorage.getItem(localKey);
     if (storedData) {
       if (JSON.parse(storedData) instanceof Array) {
-        const array = JSON.parse(storedData).map((el: InfoUser) => {
-          return { ...el };
+        const updatedArr:InfoUser[] = [];
+        JSON.parse(storedData).forEach((el: InfoUser) => {
+          updatedArr.push(el)
         });
-        setUserData(array);
+        setUserData(updatedArr);
       }
     }
   }
 
   async function addUserData(newItem: InfoUser) {
     setUserData(userData.concat([newItem]));
+    localStorage.setItem(localKey, JSON.stringify(userData));
   }
 
   function getUserData(id: string) {
     return userData.filter(({ uid }) => uid == id)[0];
   }
 
-  function editUserData() {
-    return;
+  function editUserData(id: string, data: Object) {
+    const user = getUserData(id);
+    console.log(user)
+    if (user) {
+      const edit = { ...user, ...data };
+
+      const index = userData.findIndex((data) => data.uid === user.uid);
+      if (index !== -1) { 
+        userData[index] = edit; 
+      }
+      localStorage.setItem(localKey, JSON.stringify(userData));
+      return edit;
+    }
+    localStorage.setItem(localKey, JSON.stringify(userData));
   }
 
   useEffect(() => {
     loadStorage();
   }, []);
-
-  useEffect(() => {
-    console.log("state changed");
-    localStorage.setItem(localKey, JSON.stringify(userData));
-  }, [userData]);
 
   return (
     <StorageContext.Provider

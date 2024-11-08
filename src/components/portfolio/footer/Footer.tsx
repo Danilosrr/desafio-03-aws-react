@@ -6,6 +6,7 @@ import { useStorage } from "../../../contexts/storageContext";
 import { useState } from "react";
 import Modal from "../../modal/Modal";
 import { openInNewTab } from "../../../utils/generics";
+import { useParams } from "react-router-dom";
 
 type socialMedias = "linkedin" | "youtube" | "twitter" | "instagram" | "facebook";
 
@@ -37,7 +38,7 @@ export default function Footer({email, uid}:Readonly<Props>) {
       {showEmail && (
         <article className="email">
           <b>Sinta-se livre para me contatar a qualquer momento!</b>
-          {editable?<input value={email}/>:<h5>{email}</h5>}
+          {editable?<input defaultValue={email}/>:<h5>{email}</h5>}
         </article>
       )}
       <article className="socials">
@@ -65,7 +66,7 @@ export default function Footer({email, uid}:Readonly<Props>) {
         <span><IoMdPin />Brasil</span>
         <p>© 2024, All Rights By Compass UOL</p>
       </footer>
-      <Modal title={`Adicionar ${socialMedia}`} isOpen={modal} setState={setModal} keys={[{name: socialMedia, required:true}]}/>
+      <Modal uid={uid} isOpen={modal} setState={setModal} keys={[{name: socialMedia, required:false}]}/>
     </section>
   );
 }

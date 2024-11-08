@@ -4,6 +4,7 @@ import { Experience } from "../../../interfaces/search";
 import Modal from "../../modal/Modal";
 import { useState } from "react";
 import "./Experiences.css";
+import { useParams } from "react-router-dom";
 
 interface Props {
   data: Experience[]
@@ -12,6 +13,7 @@ interface Props {
 export default function Experiences({data}:Readonly<Props>) {
   const { editable } = useStorage();
   const [modal, setModal] = useState<boolean>(false);
+  const {uid} = useParams();
 
   const addCardButton = (data.length !== 4 && editable)
   const emptyCase = (data.length == 0 && !editable )
@@ -67,18 +69,6 @@ export default function Experiences({data}:Readonly<Props>) {
           </article>
         )}
       </div>
-      <Modal
-        title="Criação de card"
-        isOpen={modal}
-        setState={setModal}
-        keys={[
-          { name: "title", required: true },
-          { name: "period", required: true },
-          { name: "technologies", required: true },
-          { name: "summary", required: true },
-          { name: "link", required: false },
-        ]}
-      />
     </section>
   );
 }

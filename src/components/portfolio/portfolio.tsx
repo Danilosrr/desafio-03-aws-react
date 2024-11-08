@@ -49,15 +49,7 @@ export default function Portfolio() {
     <>
       <NavBar />
       {currentUser?.providerData[0].uid === uid && <EditButton />}
-      <About
-        name={storedUser?.name}
-        img={gitUser?.avatar_url}
-        login={gitUser?.login}
-        location={gitUser?.location}
-        email={gitUser?.email}
-        pitch={gitUser?.bio}
-        bio={storedUser?.bio}
-      />
+      <About gitUser={gitUser}/>
       <Experiences data={storedUser ? storedUser.experiences : []} />
       <Footer email={storedUser?.email} uid={uid}/>
     </>
