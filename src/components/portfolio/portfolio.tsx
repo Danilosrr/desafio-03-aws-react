@@ -13,7 +13,7 @@ import { useStorage } from "../../contexts/storageContext";
 
 export default function Portfolio() {
   const [gitUser, setGitUser] = useState<GithubUserData | null>(null);
-  const [storedUser, setStoredUser] = useState<InfoUser | null>(null);
+  const [ storedUser, setStoredUser] = useState<InfoUser | null>(null);
   const { currentUser } = useAuth();
   const { getUserData } = useStorage();
   const { uid } = useParams();
@@ -31,7 +31,6 @@ export default function Portfolio() {
     try {
       const storedUser = getUserData(uid);
       setStoredUser(storedUser);
-      console.log(storedUser);
     } catch (error) {
       console.log(error);
     }
@@ -42,6 +41,7 @@ export default function Portfolio() {
   }, []);
 
   useEffect(() => {
+    console.log(storedUser)
     if (uid) getStored(uid);
   }, [storedUser]);
 
@@ -49,17 +49,9 @@ export default function Portfolio() {
     <>
       <NavBar />
       {currentUser?.providerData[0].uid === uid && <EditButton />}
-      <About
-        name={storedUser?.name}
-        img={gitUser?.avatar_url}
-        login={gitUser?.login}
-        location={gitUser?.location}
-        email={gitUser?.email}
-        pitch={gitUser?.bio}
-        bio={storedUser?.bio}
-      />
+      <About gitUser={gitUser}/>
       <Experiences data={storedUser ? storedUser.experiences : []} />
-      <Footer email={storedUser?.email} />
+      <Footer email={storedUser?.email} uid={uid}/>
     </>
   );
 }

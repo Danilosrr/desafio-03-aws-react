@@ -1,13 +1,14 @@
 import { useForm } from "react-hook-form";
 import { useRef } from "react";
 import "./Modal.css";
-import { enumKeys } from "../../interfaces/search";
+import { enumSocials, enumExperience } from "../../interfaces/search";
+import { useStorage } from "../../contexts/storageContext";
 
 interface Props {
-  isOpen: boolean;
+  uid?: string;
+  index?: number;
   setState: React.Dispatch<React.SetStateAction<boolean>>;
-  keys: { name: enumKeys; required: boolean }[];
-  title?: string;
+  keys: { name: enumSocials | enumExperience; required: boolean }[];
 }
 
 interface IModalInput {
@@ -27,45 +28,80 @@ const placeholders= {
   facebook: 'Digite a URL',
 }
 
-export default function Modal({ isOpen, setState, keys, title }: Readonly<Props>) {
+export default function Modal({ uid,index, setState, keys }: Readonly<Props>) {
   const modalRef = useRef<HTMLFormElement>(null);
+  const { getUserData,editUserData,editUserExperience} = useStorage();
 
   const {
+    reset,
     register,
     handleSubmit,
-    formState: { errors,isValid },
+    formState: { isValid },
   } = useForm();
   
   const cancel = () => {
+    reset();
     setState(false);
   };
 
   const onSubmit = (data: IModalInput) => {
-    console.log("submit", data);
+    if (uid) {
+      if (typeof index == 'number') {
+        console.log('edit experience')
+        editUserExperience(uid,index,data)
+      } else {
+        console.log('edit data')
+        editUserData(uid,data)
+      };
+      setState(false);
+    }
   };
 
   const checkModal = (e: React.MouseEvent) => {
     if (!modalRef.current?.contains(e.target as HTMLDivElement)) cancel();
   };
 
-  return isOpen ? (
+  return (
     <div className="modal" onClick={checkModal}>
       <form ref={modalRef} onSubmit={handleSubmit(onSubmit)}>
-        {title && <h2>{title}</h2>}
-        {keys.map(({ name, required }) => {
-          return (
-            <input
-              placeholder={placeholders[name]}
-              key={name}
-              {...register(name, {
-                required: {
-                  value: required,
-                  message: `preencha o campo ${name}`,
-                },
-              })}
-            />
-          );
-        })}
+        <h2>Adicionar Link</h2>
+        { typeof index == 'number' ?
+          keys.map(({ name, required }) => {
+            const edit = uid && !!getUserData(uid).experiences[index];
+            const input = edit ? getUserData(uid).experiences[index][name as enumExperience] : ""
+
+            return (
+              <input
+                defaultValue={input}
+                placeholder={placeholders[name]}
+                key={name}
+                {...register(name, {
+                  required: {
+                    value: required,
+                    message: `preencha o campo ${name}`,
+                  },
+                })}
+              />
+            );
+          })
+        :
+          keys.map(({ name, required }) => {
+            const input = uid && getUserData(uid)[name as enumSocials]
+            return (
+              <input
+                defaultValue={input}
+                placeholder={placeholders[name]}
+                key={name}
+                {...register(name, {
+                  required: {
+                    value: required,
+                    message: `preencha o campo ${name}`,
+                  },
+                })}
+              />
+            );
+          })
+        }
         <span className="modalButtons">
           <button
             type="submit"
@@ -80,7 +116,5 @@ export default function Modal({ isOpen, setState, keys, title }: Readonly<Props>
         </span>
       </form>
     </div>
-  ) : (
-    <></>
-  );
+  ) 
 }

@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 import { useAuth } from "../../contexts/authContext";
 import { useStorage } from "../../contexts/storageContext";
 import { useNavigate } from "react-router-dom";
-import Modal from "../modal/Modal";
 import "./Search.css";
 
 interface IFormInput {
