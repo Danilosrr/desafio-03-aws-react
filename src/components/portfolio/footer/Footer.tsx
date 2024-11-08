@@ -1,4 +1,3 @@
-import { BsInstagram, BsFacebook, BsTwitter, BsYoutube } from "react-icons/bs";
 import { IoMdPin } from "react-icons/io";
 import "./Footer.css";
 import { EditDot } from "../editButton/EditButton";
@@ -6,6 +5,10 @@ import { useStorage } from "../../../contexts/storageContext";
 import { useState } from "react";
 import Modal from "../../modal/Modal";
 import { openInNewTab } from "../../../utils/generics";
+import facebook from "../../../assets/img/facebook.png";
+import instagram from "../../../assets/img/instagram.png";
+import twitter from "../../../assets/img/twitter.png";
+import youtube from "../../../assets/img/youtube.png";
 
 type socialMedias =
   | "linkedin"
@@ -58,19 +61,19 @@ export default function Footer({ email, uid }: Readonly<Props>) {
         <div className="buttonGroup">
           <figure className="circle" onClick={() => handleClick("instagram")}>
             <EditDot />
-            <BsInstagram size={22} />
+            <img src={instagram} alt="instagram"/>
           </figure>
           <figure className="circle" onClick={() => handleClick("facebook")}>
             <EditDot />
-            <BsFacebook size={22} />
+            <img src={facebook} alt="facebook"/>
           </figure>
           <figure className="circle" onClick={() => handleClick("twitter")}>
             <EditDot />
-            <BsTwitter size={22} />
+            <img src={twitter} alt="twitter"/>
           </figure>
           <figure className="circle" onClick={() => handleClick("youtube")}>
             <EditDot />
-            <BsYoutube size={22} />
+            <img src={youtube} alt="youtube"/>
           </figure>
         </div>
       </article>
