@@ -82,7 +82,8 @@
                 img{
                     filter: grayscale(1);
                     width: 40px;
-                    -webkit-transition : -webkit-filter 250ms ease-in-out
+                    transition : -webkit-filter 250ms ease-in-out;
+                    -webkit-transition : -webkit-filter 250ms ease-in-out;
                 }
                 img:hover {
                     filter: none;
