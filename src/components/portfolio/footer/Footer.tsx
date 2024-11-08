@@ -18,10 +18,17 @@ interface Props {
 export default function Footer({email, uid}:Readonly<Props>) {
   const [modal, setModal] = useState<boolean>(false);
   const [socialMedia, setSocialMedia] = useState<socialMedias>("linkedin");
-  const { editable,getUserData } = useStorage();
+  const { editable,editUserData,getUserData } = useStorage();
   
   const showEmail = (email || editable)
   
+  const saveInput = (e: React.ChangeEvent) => {
+    if (uid) {
+      const { name, value } = e.target as HTMLInputElement;
+      editUserData(uid, { [name]: value });
+    }
+  };
+
   const handleClick = (socialMedia:socialMedias) => {
     if (editable) {
       setSocialMedia(socialMedia);
@@ -38,7 +45,7 @@ export default function Footer({email, uid}:Readonly<Props>) {
       {showEmail && (
         <article className="email">
           <b>Sinta-se livre para me contatar a qualquer momento!</b>
-          {editable?<input defaultValue={email}/>:<h5>{email}</h5>}
+          {<input name="email" onChange={saveInput} defaultValue={email} disabled={!editable}/>}
         </article>
       )}
       <article className="socials">

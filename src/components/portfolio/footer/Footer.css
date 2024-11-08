@@ -12,6 +12,9 @@
         max-width: 500px;
         margin: auto;
     }
+    input:disabled {
+        border-color: transparent;
+    }
 
     b,
     h5,

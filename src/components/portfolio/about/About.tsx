@@ -15,7 +15,7 @@ export default function About({
   gitUser,
 }: Readonly<Props>) {
   const {uid} = useParams();
-  const {editable,getUserData} = useStorage();
+  const {editable,editUserData,getUserData} = useStorage();
   const [modal,setModal] = useState<boolean>(false)
 
   const linkedinClick = () => {
@@ -28,6 +28,13 @@ export default function About({
     };
   }
   
+  const saveInput = (e: React.ChangeEvent) => {
+    if (uid) {
+      const { name, value } = e.target as HTMLInputElement;
+      editUserData(uid, { [name]: value });
+    }
+  };
+
   const storedUser = uid ? getUserData(uid) : undefined;
 
   return (
@@ -44,7 +51,7 @@ export default function About({
             </figure>
         </article>
         <aside className="aboutPitch">
-            {(storedUser?.name || editable) && <h2>Hello,<br/> I'm { editable ? <input size={20} defaultValue={storedUser?.name}/>:<b>{storedUser?.name}</b> }</h2>}
+            {(storedUser?.name || editable) && <h2>Hello,<br/> I'm { editable ? <input name="name" onChange={saveInput} defaultValue={storedUser?.name}/>:<b>{storedUser?.name}</b> }</h2>}
             { storedUser?.pitch && <p>{storedUser?.pitch}</p>}
             <span>
             {gitUser?.login && <button onClick={() => openInNewTab(`https://github.com/${gitUser.login}`)}>Github</button>}
@@ -56,9 +63,11 @@ export default function About({
         <article>
             <h2>Minha história</h2>
             <textarea 
+              name="bio"
               disabled={!editable} 
               placeholder={editable?"Adicione sua história":"Não há nenhuma história pra contar!"} 
               defaultValue={storedUser?.bio}
+              onChange={saveInput}
             ></textarea>
         </article>
       </section>
