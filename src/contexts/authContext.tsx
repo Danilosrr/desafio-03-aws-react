@@ -13,6 +13,7 @@ const AuthContext = React.createContext<IAuthContext>({} as IAuthContext);
 
 interface IAuthContext {
   currentUser: User | null;
+  setCurrentUser: React.Dispatch<React.SetStateAction<User | null>>;
   userLoggedIn: boolean;
   signInGithub: () => Promise<User | undefined>;
   signOutGithub: () => Promise<void>;
@@ -68,7 +69,7 @@ export function AuthProvider({ children }: Readonly<{ children: ReactNode }>) {
 
   return (
     <AuthContext.Provider
-      value={{ currentUser, userLoggedIn, signInGithub, signOutGithub }}
+      value={{ currentUser, setCurrentUser, userLoggedIn, signInGithub, signOutGithub }}
     >
       {children}
     </AuthContext.Provider>
