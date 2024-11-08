@@ -66,7 +66,7 @@ export default function Footer({email, uid}:Readonly<Props>) {
         <span><IoMdPin />Brasil</span>
         <p>© 2024, All Rights By Compass UOL</p>
       </footer>
-      <Modal uid={uid} isOpen={modal} setState={setModal} keys={[{name: socialMedia, required:false}]}/>
+      { modal && <Modal uid={uid} setState={setModal} keys={[{name: socialMedia, required:false}]}/>}
     </section>
   );
 }

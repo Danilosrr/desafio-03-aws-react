@@ -62,14 +62,7 @@ export default function About({
             ></textarea>
         </article>
       </section>
-      <Modal
-        uid={uid}
-        isOpen={modal}
-        setState={setModal}
-        keys={[
-          { name: "linkedin", required: false },
-        ]}
-      />
+      { modal && <Modal uid={uid} setState={setModal} keys={[{ name: "linkedin", required: false }]}/> }
     </>
   );
 }

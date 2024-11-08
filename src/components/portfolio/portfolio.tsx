@@ -13,7 +13,7 @@ import { useStorage } from "../../contexts/storageContext";
 
 export default function Portfolio() {
   const [gitUser, setGitUser] = useState<GithubUserData | null>(null);
-  const [storedUser, setStoredUser] = useState<InfoUser | null>(null);
+  const [ storedUser, setStoredUser] = useState<InfoUser | null>(null);
   const { currentUser } = useAuth();
   const { getUserData } = useStorage();
   const { uid } = useParams();
@@ -31,7 +31,6 @@ export default function Portfolio() {
     try {
       const storedUser = getUserData(uid);
       setStoredUser(storedUser);
-      console.log(storedUser);
     } catch (error) {
       console.log(error);
     }
@@ -42,8 +41,9 @@ export default function Portfolio() {
   }, []);
 
   useEffect(() => {
+    console.log(storedUser?.experiences)
     if (uid) getStored(uid);
-  }, [storedUser]);
+  }, [storedUser,getUserData]);
 
   return (
     <>

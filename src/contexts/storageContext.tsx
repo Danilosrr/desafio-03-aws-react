@@ -10,6 +10,7 @@ interface IStorageContext {
   addUserData: (item: InfoUser) => void;
   getUserData: (uid: string) => InfoUser;
   editUserData: (uid: string, prop: Object) => void;
+  editUserExperience: (uid: string, index:number, prop: Object) => void;
   editable: boolean;
   setEditable: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -53,9 +54,25 @@ export function StorageProvider({
     if (user) {
       const edit = { ...user, ...data };
 
-      const index = userData.findIndex((data) => data.uid === user.uid);
+      const index = userData.findIndex((el) => el.uid === user.uid);
       if (index !== -1) { 
         userData[index] = edit; 
+      }
+      localStorage.setItem(localKey, JSON.stringify(userData));
+      return edit;
+    }
+    localStorage.setItem(localKey, JSON.stringify(userData));
+  }
+
+  function editUserExperience(id:string, index:number, data: Object) {
+    const user = getUserData(id);
+    if (user) {
+      const edit = { ...user.experiences[index], ...data };
+      console.log(edit)
+
+      const i = userData.findIndex((el) => el.uid === user.uid);
+      if (i !== -1) { 
+        userData[i].experiences[index] = edit; 
       }
       localStorage.setItem(localKey, JSON.stringify(userData));
       return edit;
@@ -74,6 +91,7 @@ export function StorageProvider({
         addUserData,
         getUserData,
         editUserData,
+        editUserExperience,
         editable,
         setEditable,
       }}

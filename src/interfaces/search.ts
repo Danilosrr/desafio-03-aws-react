@@ -6,7 +6,7 @@ export interface Suggestion {
 export interface Experience {
   title: string;
   period: string;
-  technologies: string[];
+  technologies: string;
   summary: string;
   link: string;
 }
@@ -25,4 +25,4 @@ export interface InfoUser extends Suggestion {
 
 export type enumSocials = "linkedin"|"youtube"|"twitter"|"instagram"|"facebook";
 
-export type InfoUserKeys = "name"|"uid"|"linkedin"|"youtube"|"facebook"|"twitter"|"instagram"|"email"|"bio"|"pitch";
+export type enumExperience = "title"|"period"|"technologies"|"summary"|"link";
