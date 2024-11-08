@@ -13,10 +13,11 @@
         margin: auto;
     }
     input:disabled {
-        border-color: transparent;
+        border: none;
     }
 
     b,
+    h4,
     h5,
     span,
     input,
@@ -30,7 +31,7 @@
         font-weight: 800;
     }
 
-    h5,input {
+    h5,input,h4 {
         font-size: 28px;
         font-weight: 800;
     }
@@ -109,7 +110,7 @@
             font-size: 14px;
         }
         .email {
-            h5,input {
+            h5,h4,input {
                 font-size: 18px;
             }
         }
