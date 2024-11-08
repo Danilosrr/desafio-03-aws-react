@@ -1,0 +1,98 @@
+.modal {
+    z-index: 99;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #6d6d6d96;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: "Roboto", sans-serif;
+    line-height: 130%;
+    
+    h2 {
+        color: #18191F !important;
+        font-size: 32px;
+        font-weight: 800;
+    }
+
+    form {
+        background-color: #FFF;
+        display: grid;
+        grid-template-columns: 1fr;
+        border-radius: 18px;
+        padding: 42px;
+        gap: 22px;
+
+        input, button {
+            box-sizing: border-box;
+            border: #18191F solid 1px;
+            border-radius: 6px;
+            height: 36px;
+        }
+
+        input {
+            color: #18191F;
+            font-size: 16px;
+            font-weight: 600;
+            padding-left: 12px;
+            width: 100%;
+            min-width: 300px;
+        }
+        input::placeholder {
+            font-size: 16px;
+            font-weight: 600;
+            font-family: "Roboto", sans-serif;
+            line-height: 130%;
+            color: #D1D5DB;
+        }
+
+        button {
+            font-size: 16px;
+            font-weight: 600;
+            transition: background-color 250ms ease-in-out;
+        }
+        button:hover {
+            cursor: pointer;
+        }
+
+        .modalButtons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+
+            .saveButton {
+                border: none;
+                color: #FFF;
+                background-color: #172A3A;
+            }
+            .saveButton:disabled{
+                background: #D1D5DB;
+            }   
+
+            .cancelButton {
+                color: #172A3A;
+                background-color: #FFF;
+            }
+            .cancelButton:hover {
+                color: #FFF;
+                background-color: #992020;
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .modal {
+        form {
+            padding: 20px;
+            input {
+                width: 100%;
+            }
+        }
+    }
+}

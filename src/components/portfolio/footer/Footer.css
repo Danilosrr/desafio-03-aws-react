@@ -1,0 +1,117 @@
+.contactSection {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    box-sizing: border-box;
+    width: 100vw;
+
+    input {
+        all: unset;
+        border-bottom: #FFF solid 3px;
+        max-width: 500px;
+        margin: auto;
+    }
+    input:disabled {
+        border-color: transparent;
+    }
+
+    b,
+    h5,
+    span,
+    input,
+    p {
+        font-family: "Roboto", sans-serif;
+        line-height: 130%;
+    }
+
+    b {
+        font-size: 20px;
+        font-weight: 800;
+    }
+
+    h5,input {
+        font-size: 28px;
+        font-weight: 800;
+    }
+
+    .email,
+    .socials {
+        display: grid;
+        text-align: center;
+        grid-template-columns: 100%;
+        grid-template-rows: 1fr 1fr;
+        gap: 20px;
+    }
+
+    .email {
+        box-sizing: border-box;
+        flex-wrap: wrap;
+        background-color: #172A3A;
+        padding: 64px;
+        width: 100%;
+        color: #FFF;
+
+        h5 {
+            word-break: break-all;
+        }
+    }
+
+    .socials {
+        padding: 64px;
+        
+        .buttonGroup {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+            gap: 10px;
+
+            .circle {
+                position: relative;
+                background-color: #172A3A;
+                color: #FFF;
+                height: 48px;
+                width: 48px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .circle:hover {
+                cursor: pointer;
+            }
+        }
+    }
+
+    .copyrightNotice {
+        display: flex;
+        padding: 0 64px 42px 64px;
+        gap: 40px;
+        color: #172A3A;
+
+        span,
+        p {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        span {
+            display: flex;
+            gap: 6px;
+        }
+    }
+}
+
+@media (max-width: 375px) {
+    .contactSection {
+        b {
+            font-size: 14px;
+        }
+        .email {
+            h5,input {
+                font-size: 18px;
+            }
+        }
+    }
+}
