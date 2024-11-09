@@ -5,6 +5,7 @@ import Modal from "../../modal/Modal";
 import { useReducer, useState } from "react";
 import "./Experiences.css";
 import { useParams } from "react-router-dom";
+import { openInNewTab } from "../../../utils/generics";
 
 interface Props {
   data: Experience[]
@@ -53,7 +54,7 @@ export default function Experiences({data}:Readonly<Props>) {
                   })}
                 </span>
                 <p>{summary}</p>
-                {link && <button>Ver repositório</button>}
+                {link && <button onClick={() => openInNewTab(link)}>Ver repositório</button>}
               </div>
               {editable && (
                 <div className="cardButtons">

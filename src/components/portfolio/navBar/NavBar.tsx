@@ -3,13 +3,17 @@ import { useAuth } from "../../../contexts/authContext";
 import "./NavBar.css";
 import { Suggestion } from "../../../interfaces/search";
 import { useNavigate } from "react-router-dom";
+import { useStorage } from "../../../contexts/storageContext";
 
 export default function NavBar() {
-  const { currentUser, signInGithub, signOutGithub } = useAuth();
+  const { currentUser, setCurrentUser, signInGithub, signOutGithub } = useAuth();
+  const { setEditable } = useStorage();
   const navigate = useNavigate();
 
   const logOut = async (e: React.MouseEvent) => {
     e.preventDefault();
+    setEditable(false);
+    setCurrentUser(null);
     try {
       await signOutGithub();
     } catch (error) {

@@ -1,11 +1,11 @@
 import React, { ReactNode, useContext, useEffect, useState } from "react";
 import { InfoUser } from "../interfaces/search";
 
-const StorageContext = React.createContext<IStorageContext>(
+export const StorageContext = React.createContext<IStorageContext>(
   {} as IStorageContext
 );
 
-interface IStorageContext {
+export interface IStorageContext {
   userData: InfoUser[];
   addUserData: (item: InfoUser) => void;
   getUserData: (uid: string) => InfoUser;
