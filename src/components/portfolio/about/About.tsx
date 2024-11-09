@@ -56,6 +56,7 @@ export default function About({ gitUser }: Readonly<Props>) {
               {editable ? (
                 <input
                   name="name"
+                  aria-label="name"
                   onChange={saveInput}
                   defaultValue={storedUser?.name}
                 />
