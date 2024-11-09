@@ -1,5 +1,5 @@
 import About from "./About";
-import { fireEvent, getByText, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { IStorageContext, StorageContext } from "../../../contexts/storageContext";
 import { MemoryRouter, Route, Routes } from "react-router";
 import { GithubUserData } from "../../../interfaces/github";
