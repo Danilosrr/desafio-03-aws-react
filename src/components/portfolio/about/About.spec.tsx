@@ -1,45 +1,14 @@
 import About from "./About";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
-import { IStorageContext, StorageContext } from "../../../contexts/storageContext";
+import { StorageContext } from "../../../contexts/storageContext";
 import { MemoryRouter, Route, Routes } from "react-router";
 import { GithubUserData } from "../../../interfaces/github";
 import { openInNewTab } from "../../../utils/generics";
-import { InfoUser } from "../../../interfaces/search";
-
-const gitUser = {
-  name: "john Doe",
-  avatar_url: "avatarUrl",
-  bio: "John Doe Bio",
-  email: "email@email.com",
-  id: 1,
-  location: "location",
-  login: "johnDoeLogin",
-};
-
-const storedUser = {
-  linkedin: "linkdin",
-  youtube: "youtube",
-  facebook: "facebook",
-  twitter: "twitter",
-  instagram: "instagram",
-  email: "email@email.com",
-  experiences: [],
-  bio: "bio",
-  pitch: "pitch",
-  name: "storedName",
-  uid: "uid",
-} as InfoUser;
-
-const initialContext:IStorageContext = {
-  userData: [],
-  editable: false,
-  addUserData: jest.fn(),
-  getUserData: jest.fn(),
-  editUserData: jest.fn(),
-  editUserExperience: jest.fn(),
-  deleteUserExperience: jest.fn( ),
-  setEditable: jest.fn(),
-}
+import {
+  gitUser,
+  initialStorageContext,
+  storedUser,
+} from "../../../utils/testHelpers";
 
 jest.mock("../../../utils/generics", () => ({
   openInNewTab: jest.fn(),
@@ -47,7 +16,7 @@ jest.mock("../../../utils/generics", () => ({
 
 const renderComponent = (data: GithubUserData | null, context?: Object) => {
   render(
-    <StorageContext.Provider value={({ ...initialContext, ...context })}>
+    <StorageContext.Provider value={{ ...initialStorageContext, ...context }}>
       <MemoryRouter initialEntries={["/portfolio/1"]}>
         <Routes>
           <Route path="/portfolio/:uid" element={<About gitUser={data} />} />
@@ -59,7 +28,7 @@ const renderComponent = (data: GithubUserData | null, context?: Object) => {
 
 describe("AboutSection without storedUser", () => {
   it("should render image", () => {
-    renderComponent(gitUser,{getUserData:jest.fn()});
+    renderComponent(gitUser, { getUserData: jest.fn() });
     expect(screen.getByAltText("user")).toBeTruthy();
   });
 
@@ -97,7 +66,9 @@ describe("AboutSection without storedUser", () => {
 
   it("should disable textarea", () => {
     renderComponent(gitUser);
-    expect(screen.getByPlaceholderText("Não há nenhuma história pra contar!")).not.toBeEnabled();
+    expect(
+      screen.getByPlaceholderText("Não há nenhuma história pra contar!")
+    ).not.toBeEnabled();
   });
 });
 
@@ -137,9 +108,9 @@ describe("AboutSection with storedUser", () => {
 
 describe("AboutSection editable", () => {
   it("should render modal", async () => {
-    renderComponent(gitUser, { editable: true, getUserData:() => storedUser });
+    renderComponent(gitUser, { editable: true, getUserData: () => storedUser });
     const button = screen.getByText("LinkedIn");
-    await waitFor(()=> fireEvent.click(button))
+    await waitFor(() => fireEvent.click(button));
     expect(screen.getByText("Adicionar Link")).toBeInTheDocument();
   });
 
@@ -149,16 +120,20 @@ describe("AboutSection editable", () => {
   });
 
   it("should call input onChange event", async () => {
-    renderComponent(gitUser, { editable: true ,  getUserData:() => storedUser});
-    const input = screen.getByRole("textbox", {name: "name"})
-    fireEvent.change(input, {target: {value: "text"}})
-    await waitFor(() => { expect(input).toHaveValue("text")})
+    renderComponent(gitUser, { editable: true, getUserData: () => storedUser });
+    const input = screen.getByRole("textbox", { name: "name" });
+    fireEvent.change(input, { target: { value: "text" } });
+    await waitFor(() => {
+      expect(input).toHaveValue("text");
+    });
   });
 
   it("should call textarea onChange event", async () => {
-    renderComponent(gitUser, { editable: true ,  getUserData:() => storedUser });
+    renderComponent(gitUser, { editable: true, getUserData: () => storedUser });
     const textarea = screen.getByPlaceholderText("Adicione sua história");
-    fireEvent.change(textarea, {target: {value: 'text'}})
-    await waitFor(() => { expect(textarea).toHaveValue('text')})
+    fireEvent.change(textarea, { target: { value: "text" } });
+    await waitFor(() => {
+      expect(textarea).toHaveValue("text");
+    });
   });
-})
+});
