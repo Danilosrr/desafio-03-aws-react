@@ -149,14 +149,14 @@ describe("AboutSection editable", () => {
   });
 
   it("should call input onChange event", async () => {
-    renderComponent(gitUser, { editable: true ,  getUserData:() => storedUser, editUserData:jest.fn });
+    renderComponent(gitUser, { editable: true ,  getUserData:() => storedUser});
     const input = screen.getByRole("textbox", {name: "name"})
     fireEvent.change(input, {target: {value: "text"}})
     await waitFor(() => { expect(input).toHaveValue("text")})
   });
 
   it("should call textarea onChange event", async () => {
-    renderComponent(gitUser, { editable: true ,  getUserData:() => storedUser, editUserData:jest.fn });
+    renderComponent(gitUser, { editable: true ,  getUserData:() => storedUser });
     const textarea = screen.getByPlaceholderText("Adicione sua história");
     fireEvent.change(textarea, {target: {value: 'text'}})
     await waitFor(() => { expect(textarea).toHaveValue('text')})
