@@ -19,10 +19,9 @@ type socialMedias =
 
 interface Props {
   uid: string | undefined;
-  email?: string;
 }
 
-export default function Footer({ email, uid }: Readonly<Props>) {
+export default function Footer({ uid }: Readonly<Props>) {
   const [modal, setModal] = useState<boolean>(false);
   const [socialMedia, setSocialMedia] = useState<socialMedias>("linkedin");
   const { editable, editUserData, getUserData } = useStorage();
@@ -50,7 +49,7 @@ export default function Footer({ email, uid }: Readonly<Props>) {
       {(storedUser?.email || editable) && (
         <article className="email">
           <b>Sinta-se livre para me contatar a qualquer momento!</b>
-          { editable ? <input name="email" onChange={saveInput} defaultValue={storedUser?.email}/>:<h4>{storedUser?.email}</h4> }
+          { editable ? <input name="email" aria-label="email" onChange={saveInput} defaultValue={storedUser?.email}/>:<h4>{storedUser?.email}</h4> }
         </article>
       )}
       <article className="socials">

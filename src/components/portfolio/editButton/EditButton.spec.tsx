@@ -1,25 +1,12 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
-import {
-  IStorageContext,
-  StorageContext,
-} from "../../../contexts/storageContext";
+import { StorageContext } from "../../../contexts/storageContext";
 import EditButton, { EditDot } from "./EditButton";
 import { ReactNode } from "react";
-
-const initialContext: IStorageContext = {
-  userData: [],
-  editable: false,
-  addUserData: jest.fn(),
-  getUserData: jest.fn(),
-  editUserData: jest.fn(),
-  editUserExperience: jest.fn(),
-  deleteUserExperience: jest.fn(),
-  setEditable: jest.fn(),
-};
+import { initialStorageContext } from "../../../utils/testHelpers";
 
 const renderComponent = (Children: ReactNode, context?: Object) => {
   render(
-    <StorageContext.Provider value={{ ...initialContext, ...context }}>
+    <StorageContext.Provider value={{ ...initialStorageContext, ...context }}>
       {Children}
     </StorageContext.Provider>
   );
@@ -39,8 +26,8 @@ describe("EditButton", () => {
   it("should hide edit icon", async () => {
     renderComponent(<EditButton />, { editable: true });
     const button = screen.getByRole("figure");
-    await waitFor(()=> fireEvent.click(button))
-    expect(initialContext.setEditable).toBeCalled();
+    await waitFor(() => fireEvent.click(button));
+    expect(initialStorageContext.setEditable).toBeCalled();
   });
 });
 

@@ -51,7 +51,7 @@ export default function Portfolio() {
       {currentUser?.providerData[0].uid === uid && <EditButton />}
       <About gitUser={gitUser}/>
       <Experiences data={storedUser ? storedUser.experiences : []} />
-      <Footer email={storedUser?.email} uid={uid}/>
+      <Footer uid={uid}/>
     </>
   );
 }
