@@ -1,46 +1,73 @@
-# Getting Started with Create React App
+# Desafio 02 - AWS React
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Descrição do Projeto
 
-## Available Scripts
+O projeto desenvolvido tem um escopo de portifólio profissional. Se trata de uma plataforma onde o usuário poderá visualizar e editar os seus dados de portifólio, podendo fazer autenticação com GitHub e consumir os dados do usuário existente no GitHub utilizando suas APIs públicas.
 
-In the project directory, you can run:
+## Tecnologias Utilizadas
 
-### `npm start`
+- **React** para construção de interfaces
+- **Axios** para requisições HTTP
+- **Firebase** para validação de login
+- **React Router DOM** para navegação
+- **Context API** para gerenciamento de estados
+- **TypesScript** para criação de tipagem
+- **React Icons** para exibir icones
+- **React-Hook-Form** para criação e validação de formulários
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Instalação
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+**1.Clone o repositório: git clone https:** //github.com/Danilosrr/desafio-03-aws-react
 
-### `npm test`
+**2.Navegue até o diretório do projeto:** cd desafio-02-aws-react
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**3.Instale as dependências:** npm install
 
-### `npm run build`
+**4.Inicie o servidor de desenvolvimento:** npm start
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Funcionalidades
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### Requisitos Gerais
 
-### `npm run eject`
+- Consumo das APIs públicas do GitHub para popular as telas (onde aplicável);
+- Uso do Firebase Authentication para autenticação do usuário;
+- Deploy da aplicação no ambiente EC2 da AWS;
+- Cobertura mínima de pelo menos 70% do código com testes unitários em Jest, e cobertura ideal de 90%;
+- Caso algum campo não traga a informação, não exiba o dado;
+- Criação das páginas e componentes com React (HTML, CSS e TS), importando apenas as imagens do Figma;
+- Uso dos hooks React básicos (useState, useRef, useEffect) e hooks customizados (se necessário);
+- Roteamento entre páginas com React Router DOM;
+- Componentização de elementos da tela onde aplicável, passando dados por props;
+- Commits semânticos, atômicos e uso de GitFlow (trabalhar com branches, branch develop > main e PRs);
+- Organização de pastas e arquivos;
+- Telas em conformidade e harmonia visual conforme o Figma;
+- Botões/links com feedback visual em hover/interação;
+- Arquivos/pastas com nomes legíveis e padronizados (camelCase, kebab-case, língua utilizada, etc);
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#### Funcionalidades Principais
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- **Consumo de API**: Consumo das APIs públicas do Github.
+- **Componentização**: Componentização de elementos, utilizando props.
+- **Responsividade**: Responsividade com foco em mobile-first.
+- **Interatividade**: Feedback visual em botões, links e ações do usuário;
+- **Autenticação**: Uso do Firebase Authentication para autenticação do usuário;
+- **Navegação**: Implementação de rotas utilizando React Router.
+- **Estados**: Uso de hooks básicos e, se necessário, criação de hooks customizados.
+- **Design**: Criação de páginas e componentes conforme um design especificado.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Telas
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+<div style="gap: 10px">
+    <img src="./src//assets/img/doc/pc1.png" style="height: 200px">
+    <img src="./src/assets/img/doc/mobile1.png" style="height: 200px">
+    </br>
+    <img src="./src/assets/img/doc/pc2.png" style="height: 200px">
+    <img src="./src/assets/img/doc/mobile2.png" style="height: 200px">
+    </br>
+    <img src="./src/assets/img/doc/pc3.png" style="height: 200px">
+    <img src="./src/assets/img/doc/mobile4.png" style="height: 200px">
+    </br>
+    <img src="./src/assets/img/doc/pc4.png" style="height: 200px">
+    <img src="./src/assets/img/doc/mobile5.png" style="height: 200px">
+</div>
