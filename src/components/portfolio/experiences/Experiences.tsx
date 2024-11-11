@@ -16,17 +16,20 @@ export default function Experiences({data}:Readonly<Props>) {
   const [modal, setModal] = useState<boolean>(false);
   const [, forceUpdate] = useReducer(x => x + 1, 0);
   const [index, setIndex] = useState<number>(0);
+  const [title, setTitle] = useState<string>("Adicionar card");
   const {uid} = useParams();
 
   const addCardButton = (data.length !== 4 && editable)
   const emptyCase = (data.length == 0 && !editable )
 
   const addCard = () => {
+    setTitle("Adicionar card")
     setIndex(data.length);
     setModal(true);
   };
 
   const editCard = (index:number) => {
+    setTitle("Editar card")
     setIndex(index);
     setModal(true);
   };
@@ -58,10 +61,10 @@ export default function Experiences({data}:Readonly<Props>) {
               </div>
               {editable && (
                 <div className="cardButtons">
-                  <span className="edit" onClick={() => editCard(index)}>
+                  <span className="edit" role="edit" onClick={() => editCard(index)}>
                     <RiEditFill size={64} />
                   </span>
-                  <span className="delete" onClick={() => deleteCard(index)} >
+                  <span className="delete" role="delete" onClick={() => deleteCard(index)} >
                     <RiDeleteBin7Fill size={64} />
                   </span>
                 </div>
@@ -83,6 +86,7 @@ export default function Experiences({data}:Readonly<Props>) {
         uid={uid} 
         setState={setModal} 
         index={index}
+        title={title}
         keys={[
           {name: 'title', required:true},
           {name: 'period', required:true},
