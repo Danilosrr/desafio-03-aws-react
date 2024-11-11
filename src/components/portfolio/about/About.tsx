@@ -65,7 +65,7 @@ export default function About({ gitUser }: Readonly<Props>) {
               )}
             </h2>
           )}
-          {storedUser?.pitch && <p>{storedUser?.pitch}</p>}
+          {gitUser?.bio && <p>{gitUser?.bio}</p>}
           <span>
             {gitUser?.login && (
               <button

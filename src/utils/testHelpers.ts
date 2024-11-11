@@ -1,5 +1,4 @@
 import { IStorageContext } from "../contexts/storageContext";
-import { GithubUserData } from "../interfaces/github";
 import { Experience, InfoUser } from "../interfaces/search";
 
 export const gitUser = {
