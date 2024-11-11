@@ -1,5 +1,6 @@
 import { IStorageContext } from "../contexts/storageContext";
-import { InfoUser } from "../interfaces/search";
+import { GithubUserData } from "../interfaces/github";
+import { Experience, InfoUser } from "../interfaces/search";
 
 export const gitUser = {
   name: "john Doe",
@@ -11,7 +12,7 @@ export const gitUser = {
   login: "johnDoeLogin",
 };
 
-export const storedUser = {
+export const storedUser: InfoUser = {
   linkedin: "linkdin",
   youtube: "youtube",
   facebook: "facebook",
@@ -23,7 +24,15 @@ export const storedUser = {
   pitch: "pitch",
   name: "storedName",
   uid: "uid",
-} as InfoUser;
+};
+
+export const experience:Experience = {
+  title: "experience",
+  period: "period",
+  technologies: "TS, React, Jest",
+  summary: "summary",
+  link: "link"
+};
 
 export const initialStorageContext: IStorageContext = {
   userData: [],
