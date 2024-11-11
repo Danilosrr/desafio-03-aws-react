@@ -9,28 +9,35 @@ interface Props {
   index?: number;
   setState: React.Dispatch<React.SetStateAction<boolean>>;
   keys: { name: enumSocials | enumExperience; required: boolean }[];
+  title?: string;
 }
 
 interface IModalInput {
   [name: string]: string;
 }
 
-const placeholders= {
-  title:'Título',
-  period: 'Período de atuação',
-  technologies: 'Habilidades (separe-as por vírgula)',
-  summary: 'Descreva sua experiência',
-  link: 'Link do repositório (Opcional)',
-  linkedin: 'Digite a URL',
-  youtube: 'Digite a URL',
-  twitter: 'Digite a URL',
-  instagram: 'Digite a URL',
-  facebook: 'Digite a URL',
-}
+const placeholders = {
+  title: "Título",
+  period: "Período de atuação",
+  technologies: "Habilidades (separe-as por vírgula)",
+  summary: "Descreva sua experiência",
+  link: "Link do repositório (Opcional)",
+  linkedin: "Digite a URL",
+  youtube: "Digite a URL",
+  twitter: "Digite a URL",
+  instagram: "Digite a URL",
+  facebook: "Digite a URL",
+};
 
-export default function Modal({ uid,index, setState, keys }: Readonly<Props>) {
+export default function Modal({
+  uid,
+  index,
+  setState,
+  keys,
+  title,
+}: Readonly<Props>) {
   const modalRef = useRef<HTMLFormElement>(null);
-  const { getUserData,editUserData,editUserExperience} = useStorage();
+  const { getUserData, editUserData, editUserExperience } = useStorage();
 
   const {
     reset,
@@ -38,7 +45,7 @@ export default function Modal({ uid,index, setState, keys }: Readonly<Props>) {
     handleSubmit,
     formState: { isValid },
   } = useForm();
-  
+
   const cancel = () => {
     reset();
     setState(false);
@@ -46,13 +53,13 @@ export default function Modal({ uid,index, setState, keys }: Readonly<Props>) {
 
   const onSubmit = (data: IModalInput) => {
     if (uid) {
-      if (typeof index == 'number') {
-        console.log('edit experience')
-        editUserExperience(uid,index,data)
+      if (typeof index == "number") {
+        console.log("edit experience");
+        editUserExperience(uid, index, data);
       } else {
-        console.log('edit data')
-        editUserData(uid,data)
-      };
+        console.log("edit data");
+        editUserData(uid, data);
+      }
       setState(false);
     }
   };
@@ -64,50 +71,46 @@ export default function Modal({ uid,index, setState, keys }: Readonly<Props>) {
   return (
     <main className="modal" onClick={checkModal}>
       <form ref={modalRef} onSubmit={handleSubmit(onSubmit)}>
-        <h2>Adicionar Link</h2>
-        { typeof index == 'number' ?
-          keys.map(({ name, required }) => {
-            const edit = uid && !!getUserData(uid).experiences[index];
-            const input = edit ? getUserData(uid).experiences[index][name as enumExperience] : ""
+        {title ? <h2>{title}</h2> : <h2>Adicionar Link</h2>}
+        {typeof index == "number"
+          ? keys.map(({ name, required }) => {
+              const edit = uid && !!getUserData(uid).experiences[index];
+              const input = edit
+                ? getUserData(uid).experiences[index][name as enumExperience]
+                : "";
 
-            return (
-              <input
-                defaultValue={input}
-                placeholder={placeholders[name]}
-                key={name}
-                {...register(name, {
-                  required: {
-                    value: required,
-                    message: `preencha o campo ${name}`,
-                  },
-                })}
-              />
-            );
-          })
-        :
-          keys.map(({ name, required }) => {
-            const input = uid && getUserData(uid)[name as enumSocials]
-            return (
-              <input
-                defaultValue={input}
-                placeholder={placeholders[name]}
-                key={name}
-                {...register(name, {
-                  required: {
-                    value: required,
-                    message: `preencha o campo ${name}`,
-                  },
-                })}
-              />
-            );
-          })
-        }
+              return (
+                <input
+                  defaultValue={input}
+                  placeholder={placeholders[name]}
+                  key={name}
+                  {...register(name, {
+                    required: {
+                      value: required,
+                      message: `preencha o campo ${name}`,
+                    },
+                  })}
+                />
+              );
+            })
+          : keys.map(({ name, required }) => {
+              const input = uid && getUserData(uid)[name as enumSocials];
+              return (
+                <input
+                  defaultValue={input}
+                  placeholder={placeholders[name]}
+                  key={name}
+                  {...register(name, {
+                    required: {
+                      value: required,
+                      message: `preencha o campo ${name}`,
+                    },
+                  })}
+                />
+              );
+            })}
         <span className="modalButtons">
-          <button
-            type="submit"
-            className="saveButton"
-            disabled={!isValid}
-          >
+          <button type="submit" className="saveButton" disabled={!isValid}>
             Salvar
           </button>
           <button type="button" className="cancelButton" onClick={cancel}>
@@ -116,5 +119,5 @@ export default function Modal({ uid,index, setState, keys }: Readonly<Props>) {
         </span>
       </form>
     </main>
-  ) 
+  );
 }

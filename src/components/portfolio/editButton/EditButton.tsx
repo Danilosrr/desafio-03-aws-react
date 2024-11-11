@@ -10,7 +10,7 @@ export default function EditButton() {
 
   return (
     <figure className="editPageButton" onClick={changeMode}>
-      {editable ? <IoMdCheckmark size={38} /> : <IoMdCreate size={38} />}
+      {editable ? <IoMdCheckmark role="save" size={38} /> : <IoMdCreate role="edit" size={38} />}
     </figure>
   );
 }
