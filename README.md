@@ -71,3 +71,10 @@ O projeto desenvolvido tem um escopo de portifólio profissional. Se trata de um
     <img src="./src/assets/img/doc/pc4.png" style="height: 200px">
     <img src="./src/assets/img/doc/mobile5.png" style="height: 200px">
 </div>
+
+## Cobertura de testes
+
+<div style="gap: 10px">
+    <img src="./src/assets/img/doc/coverage.jpeg" style="height: 300px">
+</div>
+
