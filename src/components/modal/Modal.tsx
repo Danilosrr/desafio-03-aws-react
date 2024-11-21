@@ -52,12 +52,11 @@ export default function Modal({
   };
 
   const onSubmit = (data: IModalInput) => {
+    console.log(data)
     if (uid) {
       if (typeof index == "number") {
-        console.log("edit experience");
         editUserExperience(uid, index, data);
       } else {
-        console.log("edit data");
         editUserData(uid, data);
       }
       setState(false);

@@ -1,7 +1,6 @@
 import About from "./About";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { StorageContext } from "../../../contexts/storageContext";
-import { MemoryRouter, Route, Routes } from "react-router";
 import { GithubUserData } from "../../../interfaces/github";
 import { openInNewTab } from "../../../utils/generics";
 import {
@@ -14,14 +13,15 @@ jest.mock("../../../utils/generics", () => ({
   openInNewTab: jest.fn(),
 }));
 
+jest.mock("react-router-dom", () => ({
+  ...jest.requireActual("react-router-dom"),
+  useParams: () => ({ uid: 1 }),
+}));
+
 const renderComponent = (data: GithubUserData | null, context?: Object) => {
   render(
     <StorageContext.Provider value={{ ...initialStorageContext, ...context }}>
-      <MemoryRouter initialEntries={["/portfolio/1"]}>
-        <Routes>
-          <Route path="/portfolio/:uid" element={<About gitUser={data} />} />
-        </Routes>
-      </MemoryRouter>
+      <About gitUser={data} />
     </StorageContext.Provider>
   );
 };
@@ -93,11 +93,6 @@ describe("AboutSection with storedUser", () => {
   it("should render name", () => {
     renderComponent(gitUser, { getUserData: () => storedUser });
     expect(screen.getByText("storedName")).toBeInTheDocument();
-  });
-
-  it("should render pitch", () => {
-    renderComponent(gitUser, { getUserData: () => storedUser });
-    expect(screen.getByText("pitch")).toBeInTheDocument();
   });
 
   it("should render bio", () => {

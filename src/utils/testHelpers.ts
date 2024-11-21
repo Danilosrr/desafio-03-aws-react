@@ -43,3 +43,11 @@ export const initialStorageContext: IStorageContext = {
   deleteUserExperience: jest.fn(),
   setEditable: jest.fn(),
 };
+
+export const initialModalProps = {
+  uid: undefined,
+  index: undefined,
+  title: undefined,
+  keys: [],
+  setState: jest.fn(),
+};
