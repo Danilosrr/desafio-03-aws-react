@@ -2,7 +2,6 @@ import Experiences from "./Experiences";
 import { experience, initialStorageContext, storedUser } from "../../../utils/testHelpers";
 import { StorageContext } from "../../../contexts/storageContext";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
-import { MemoryRouter, Route, Routes } from "react-router";
 import { Experience } from "../../../interfaces/search";
 import { openInNewTab } from "../../../utils/generics";
 
@@ -10,17 +9,15 @@ jest.mock("../../../utils/generics", () => ({
   openInNewTab: jest.fn(),
 }));
 
+jest.mock("react-router-dom", () => ({
+  ...jest.requireActual("react-router-dom"),
+  useParams: () => ({ uid: 1 }),
+}));
+
 const renderComponent = (array: Experience[], context?: Object) => {
   render(
     <StorageContext.Provider value={{ ...initialStorageContext, ...context }}>
-      <MemoryRouter initialEntries={["/portfolio/1"]}>
-        <Routes>
-          <Route
-            path="/portfolio/:uid"
-            element={<Experiences data={array} />}
-          />
-        </Routes>
-      </MemoryRouter>
+      <Experiences data={array} />
     </StorageContext.Provider>
   );
 };
