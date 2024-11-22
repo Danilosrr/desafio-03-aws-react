@@ -9,9 +9,9 @@ import {
 import { auth } from "../auth/firebase";
 import { useNavigate } from "react-router-dom";
 
-const AuthContext = React.createContext<IAuthContext>({} as IAuthContext);
+export const AuthContext = React.createContext<IAuthContext>({} as IAuthContext);
 
-interface IAuthContext {
+export interface IAuthContext {
   currentUser: User | null;
   setCurrentUser: React.Dispatch<React.SetStateAction<User | null>>;
   userLoggedIn: boolean;

@@ -57,6 +57,7 @@ export default function NavBar() {
           Sair
           <img
             className="userThumbnail"
+            data-testid="figure"
             src={currentUser.photoURL ? currentUser.photoURL : ""}
             alt="user thumbnail"
           />

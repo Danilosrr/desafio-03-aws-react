@@ -1,3 +1,5 @@
+import { User } from "firebase/auth";
+import { IAuthContext } from "../contexts/authContext";
 import { IStorageContext } from "../contexts/storageContext";
 import { Experience, InfoUser } from "../interfaces/search";
 
@@ -24,12 +26,12 @@ export const storedUser: InfoUser = {
   uid: "uid",
 };
 
-export const experience:Experience = {
+export const experience: Experience = {
   title: "experience",
   period: "period",
   technologies: "TS, React, Jest",
   summary: "summary",
-  link: "link"
+  link: "link",
 };
 
 export const initialStorageContext: IStorageContext = {
@@ -41,6 +43,18 @@ export const initialStorageContext: IStorageContext = {
   editUserExperience: jest.fn(),
   deleteUserExperience: jest.fn(),
   setEditable: jest.fn(),
+};
+
+export const initialAuthContext: IAuthContext = {
+  currentUser: {
+    displayName: "John Doe",
+    photoURL: "photo url",
+    providerData: [{ uid: 1 }],
+  } as unknown as User,
+  setCurrentUser: jest.fn(),
+  userLoggedIn: false,
+  signInGithub: jest.fn(),
+  signOutGithub: jest.fn(),
 };
 
 export const initialModalProps = {
