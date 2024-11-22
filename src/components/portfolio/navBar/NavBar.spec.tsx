@@ -6,15 +6,18 @@ import {
 } from "../../../utils/testHelpers";
 import NavBar from "./NavBar";
 import { AuthContext } from "../../../contexts/authContext";
-import { BrowserRouter } from "react-router-dom";
+
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: () => jest.fn()
+}));
 
 const renderComponent = (userContext?: Object, storageContext?: Object) => {
   render(
     <AuthContext.Provider value={{ ...initialAuthContext, ...userContext }}>
       <StorageContext.Provider value={{ ...initialStorageContext, ...storageContext }}>
-        <BrowserRouter >
           <NavBar />
-        </BrowserRouter>
       </StorageContext.Provider>
     </AuthContext.Provider>
   );
@@ -68,4 +71,8 @@ describe("NavBar not logged", () => {
     await act( async () => fireEvent.click(button) );
     expect(localStorage.getItem("desafio-03")).toEqual("[{\"name\":\"John Doe\",\"uid\":1},{\"name\":\"not John Doe\",\"uid\":1}]");
   });
+
+  beforeAll(()=>{
+    window.localStorage.clear();
+  })
 });
