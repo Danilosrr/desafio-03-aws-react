@@ -20,7 +20,6 @@ export interface InfoUser extends Suggestion {
   email: string;
   experiences: Experience[];
   bio: string;
-  pitch: string;
 }
 
 export type enumSocials = "linkedin"|"youtube"|"twitter"|"instagram"|"facebook";

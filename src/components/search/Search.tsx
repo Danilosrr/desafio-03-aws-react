@@ -61,7 +61,6 @@ export default function Search() {
             email: "",
             experiences: [],
             bio: "",
-            pitch: "",
           });
         }
         navigate(`/portfolio/${user.providerData[0].uid}`);
@@ -103,6 +102,7 @@ export default function Search() {
                   </li>
                 );
               }
+              else return <></>
             })}
           </ul>
         </form>

@@ -20,7 +20,7 @@ export default function Experiences({data}:Readonly<Props>) {
   const {uid} = useParams();
 
   const addCardButton = (data.length !== 4 && editable)
-  const emptyCase = (data.length == 0 && !editable )
+  const emptyCase = (data.length === 0 && !editable )
 
   const addCard = () => {
     setTitle("Adicionar card")
@@ -61,12 +61,12 @@ export default function Experiences({data}:Readonly<Props>) {
               </div>
               {editable && (
                 <div className="cardButtons">
-                  <span className="edit" role="edit" onClick={() => editCard(index)}>
+                  <button className="edit" data-testid="edit" onClick={() => editCard(index)}>
                     <RiEditFill size={64} />
-                  </span>
-                  <span className="delete" role="delete" onClick={() => deleteCard(index)} >
+                  </button>
+                  <button className="delete" data-testid="delete" onClick={() => deleteCard(index)} >
                     <RiDeleteBin7Fill size={64} />
-                  </span>
+                  </button>
                 </div>
               )}
             </article>

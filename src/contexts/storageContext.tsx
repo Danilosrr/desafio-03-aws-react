@@ -46,7 +46,7 @@ export function StorageProvider({
   }
 
   function getUserData(id: string) {
-    return userData.filter(({ uid }) => uid == id)[0];
+    return userData.filter(({ uid }) => uid === id)[0];
   }
 
   function editUserData(id: string, data: Object) {

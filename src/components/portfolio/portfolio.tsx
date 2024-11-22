@@ -27,23 +27,22 @@ export default function Portfolio() {
       console.log(error);
     }
   }
-  function getStored(uid: string) {
-    try {
-      const storedUser = getUserData(uid);
-      setStoredUser(storedUser);
-    } catch (error) {
-      console.log(error);
-    }
-  }
 
   useEffect(() => {
     if (uid) getGit(uid);
-  }, []);
+  }, [uid]);
 
   useEffect(() => {
     console.log(storedUser)
-    if (uid) getStored(uid);
-  }, [storedUser]);
+    if (uid) {
+      try {
+        const storedUser = getUserData(uid);
+        setStoredUser(storedUser);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  }, [getUserData, storedUser, uid]);
 
   return (
     <>

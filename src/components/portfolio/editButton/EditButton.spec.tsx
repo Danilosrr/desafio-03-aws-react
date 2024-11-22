@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { StorageContext } from "../../../contexts/storageContext";
 import EditButton, { EditDot } from "./EditButton";
 import { ReactNode } from "react";
@@ -26,7 +26,7 @@ describe("EditButton", () => {
   it("should hide edit icon", async () => {
     renderComponent(<EditButton />, { editable: true });
     const button = screen.getByRole("figure");
-    await waitFor(() => fireEvent.click(button));
+    fireEvent.click(button);
     expect(initialStorageContext.setEditable).toBeCalled();
   });
 });
@@ -34,7 +34,7 @@ describe("EditButton", () => {
 describe("EditDot", () => {
   it("should render", () => {
     renderComponent(<EditDot />, { editable: true });
-    expect(screen.queryByRole("figure")).toBeInTheDocument();
+    expect(screen.getByRole("figure")).toBeInTheDocument();
   });
 
   it("should not render", () => {
