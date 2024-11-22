@@ -20,7 +20,6 @@ export const storedUser: InfoUser = {
   email: "email@email.com",
   experiences: [],
   bio: "bio",
-  pitch: "pitch",
   name: "storedName",
   uid: "uid",
 };

@@ -1,4 +1,3 @@
-import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Search from "../search/Search";
 import { AuthProvider } from "../../contexts/authContext";

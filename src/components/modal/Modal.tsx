@@ -54,7 +54,7 @@ export default function Modal({
   const onSubmit = (data: IModalInput) => {
     console.log(data)
     if (uid) {
-      if (typeof index == "number") {
+      if (typeof index === "number") {
         editUserExperience(uid, index, data);
       } else {
         editUserData(uid, data);
@@ -71,7 +71,7 @@ export default function Modal({
     <main className="modal" onClick={checkModal}>
       <form ref={modalRef} onSubmit={handleSubmit(onSubmit)}>
         {title ? <h2>{title}</h2> : <h2>Adicionar Link</h2>}
-        {typeof index == "number"
+        {typeof index === "number"
           ? keys.map(({ name, required }) => {
               const edit = uid && !!getUserData(uid).experiences[index];
               const input = edit

@@ -44,7 +44,7 @@ describe("AboutSection without storedUser", () => {
 
   it("should render github button", () => {
     renderComponent(gitUser);
-    expect(screen.getByText("Github").closest("button")).toBeEnabled();
+    expect(screen.getByText("Github")).toBeEnabled();
   });
 
   it("should call github button event", () => {
@@ -105,7 +105,7 @@ describe("AboutSection editable", () => {
   it("should render modal", async () => {
     renderComponent(gitUser, { editable: true, getUserData: () => storedUser });
     const button = screen.getByText("LinkedIn");
-    await waitFor(() => fireEvent.click(button));
+    fireEvent.click(button);
     expect(screen.getByText("Adicionar Link")).toBeInTheDocument();
   });
 

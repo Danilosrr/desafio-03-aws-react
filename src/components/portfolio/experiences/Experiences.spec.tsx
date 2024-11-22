@@ -1,7 +1,7 @@
 import Experiences from "./Experiences";
 import { experience, initialStorageContext, storedUser } from "../../../utils/testHelpers";
 import { StorageContext } from "../../../contexts/storageContext";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { Experience } from "../../../interfaces/search";
 import { openInNewTab } from "../../../utils/generics";
 
@@ -23,10 +23,6 @@ const renderComponent = (array: Experience[], context?: Object) => {
 };
 
 describe("experienceSection with data", () => {
-  it("should render title", () => {
-    renderComponent([experience]);
-    expect(screen.getByText(experience.title)).toBeInTheDocument();
-  });
   it("should render title", () => {
     renderComponent([experience]);
     expect(screen.getByText(experience.title)).toBeInTheDocument();
@@ -58,25 +54,25 @@ describe("experienceSection with data", () => {
 
   it("should render edit button on hover", () => {
     renderComponent([experience], { editable: true });
-    expect(screen.getByRole("edit")).toBeInTheDocument();
+    expect(screen.getByTestId("edit")).toBeInTheDocument();
   });
 
   it("should call edit button event", async () => {
     renderComponent([experience], { editable: true, getUserData: () => storedUser });
-    const button = screen.getByRole("edit");
-    await waitFor(()=>fireEvent.click(button));
+    const button = screen.getByTestId("edit");
+    fireEvent.click(button);
     expect(screen.getByText("Editar card")).toBeInTheDocument();
   });
 
   it("should render delete button on hover", () => {
     renderComponent([experience], { editable: true });
-    expect(screen.getByRole("delete")).toBeInTheDocument();
+    expect(screen.getByTestId("delete")).toBeInTheDocument();
   });
 
   it("should call delete button event", async () => {
     renderComponent([experience], { editable: true, getUserData: () => storedUser });
-    const button = screen.getByRole("delete");
-    await waitFor(()=>fireEvent.click(button));
+    const button = screen.getByTestId("delete");
+    fireEvent.click(button);
     expect(initialStorageContext.deleteUserExperience).toBeCalled();
   });
 });
@@ -96,7 +92,7 @@ describe("experienceSection with no data", () => {
   it("should call addCard event", async () => {
     renderComponent([experience], { editable: true, getUserData: () => storedUser });
     const button = screen.getByText("Adicionar card");
-    await waitFor(()=>fireEvent.click(button));
+    fireEvent.click(button);
     expect(screen.getAllByText("Adicionar card").length).toBe(2);
   });
 });
