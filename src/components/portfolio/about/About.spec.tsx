@@ -1,5 +1,11 @@
 import About from "./About";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import {
+  act,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from "@testing-library/react";
 import { StorageContext } from "../../../contexts/storageContext";
 import { GithubUserData } from "../../../interfaces/github";
 import { openInNewTab } from "../../../utils/generics";
@@ -105,7 +111,8 @@ describe("AboutSection editable", () => {
   it("should render modal", async () => {
     renderComponent(gitUser, { editable: true, getUserData: () => storedUser });
     const button = screen.getByText("LinkedIn");
-    fireEvent.click(button);
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    await act(async () => fireEvent.click(button));
     expect(screen.getByText("Adicionar Link")).toBeInTheDocument();
   });
 

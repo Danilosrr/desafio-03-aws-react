@@ -102,7 +102,7 @@ export default function Search() {
                   </li>
                 );
               }
-              else return <></>
+              else return null
             })}
           </ul>
         </form>

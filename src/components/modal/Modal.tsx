@@ -52,7 +52,6 @@ export default function Modal({
   };
 
   const onSubmit = (data: IModalInput) => {
-    console.log(data)
     if (uid) {
       if (typeof index === "number") {
         editUserExperience(uid, index, data);
@@ -68,7 +67,7 @@ export default function Modal({
   };
 
   return (
-    <main className="modal" onClick={checkModal}>
+    <main className="modal" data-testid="backdrop" onClick={checkModal}>
       <form ref={modalRef} onSubmit={handleSubmit(onSubmit)}>
         {title ? <h2>{title}</h2> : <h2>Adicionar Link</h2>}
         {typeof index === "number"
